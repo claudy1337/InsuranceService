@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CTPBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="idCar" />
+          </Key>
+          <Property Name="idCar" Type="int" Nullable="false" />
+          <Property Name="idCategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Stamp" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearRelease" Type="date" />
+          <Property Name="EnginePower" Type="int" />
+          <Property Name="VIN" Type="nchar" MaxLength="10" />
+          <Property Name="BodyNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChassisNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="nchar" MaxLength="10" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CategoryType">
+          <Key>
+            <PropertyRef Name="idCategoryType" />
+          </Key>
+          <Property Name="idCategoryType" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" />
+          <Property Name="idCategory" Type="int" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDay" Type="date" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="contract">
+          <Key>
+            <PropertyRef Name="idContract" />
+          </Key>
+          <Property Name="idContract" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Law">
+          <Key>
+            <PropertyRef Name="idLaw" />
+          </Key>
+          <Property Name="idLaw" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="idClient" Type="int" />
+          <Property Name="DateIssue" Type="date" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateEnd" Type="date" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+          <Property Name="TPAuthority" Type="nvarchar" MaxLength="50" />
+          <Property Name="idTypeCategory" Type="int" />
+        </EntityType>
+        <EntityType Name="STS">
+          <Key>
+            <PropertyRef Name="idSTS" />
+          </Key>
+          <Property Name="idSTS" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="int" />
+          <Property Name="idCar" Type="int" />
+          <Property Name="STSNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Car_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryType_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="CategoryType">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryType_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="CategoryType">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Law_CategoryType">
+          <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="0..1" />
+          <End Role="Law" Type="Self.Law" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryType">
+              <PropertyRef Name="idCategoryType" />
+            </Principal>
+            <Dependent Role="Law">
+              <PropertyRef Name="idTypeCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Law_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Law" Type="Self.Law" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Law">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STS_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="STS" Type="Self.STS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="idCar" />
+            </Principal>
+            <Dependent Role="STS">
+              <PropertyRef Name="idCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STS_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="STS" Type="Self.STS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="STS">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CTPBDModelContainer">
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contract" EntityType="Self.contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Law" EntityType="Self.Law" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STS" EntityType="Self.STS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Car_Client" Association="Self.FK_Car_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryType_Category" Association="Self.FK_CategoryType_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryType" EntitySet="CategoryType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryType_Client" Association="Self.FK_CategoryType_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CategoryType" EntitySet="CategoryType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Law_CategoryType" Association="Self.FK_Law_CategoryType">
+            <End Role="CategoryType" EntitySet="CategoryType" />
+            <End Role="Law" EntitySet="Law" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Law_Client" Association="Self.FK_Law_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Law" EntitySet="Law" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STS_Car" Association="Self.FK_STS_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="STS" EntitySet="STS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STS_Client" Association="Self.FK_STS_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="STS" EntitySet="STS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CTPBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="idCar" />
+          </Key>
+          <Property Name="idCar" Type="Int32" Nullable="false" />
+          <Property Name="idCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Stamp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearRelease" Type="DateTime" Precision="0" />
+          <Property Name="EnginePower" Type="Int32" />
+          <Property Name="VIN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BodyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChassisNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Car_Client" FromRole="Car" ToRole="Client" />
+          <NavigationProperty Name="STS" Relationship="Self.FK_STS_Car" FromRole="Car" ToRole="STS" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CategoryType" Relationship="Self.FK_CategoryType_Category" FromRole="Category" ToRole="CategoryType" />
+        </EntityType>
+        <EntityType Name="CategoryType">
+          <Key>
+            <PropertyRef Name="idCategoryType" />
+          </Key>
+          <Property Name="idCategoryType" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="Int32" />
+          <Property Name="idCategory" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_CategoryType_Category" FromRole="CategoryType" ToRole="Category" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_CategoryType_Client" FromRole="CategoryType" ToRole="Client" />
+          <NavigationProperty Name="Law" Relationship="Self.FK_Law_CategoryType" FromRole="CategoryType" ToRole="Law" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDay" Type="DateTime" Precision="0" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Client" FromRole="Client" ToRole="Car" />
+          <NavigationProperty Name="CategoryType" Relationship="Self.FK_CategoryType_Client" FromRole="Client" ToRole="CategoryType" />
+          <NavigationProperty Name="Law" Relationship="Self.FK_Law_Client" FromRole="Client" ToRole="Law" />
+          <NavigationProperty Name="STS" Relationship="Self.FK_STS_Client" FromRole="Client" ToRole="STS" />
+        </EntityType>
+        <EntityType Name="contract">
+          <Key>
+            <PropertyRef Name="idContract" />
+          </Key>
+          <Property Name="idContract" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Law">
+          <Key>
+            <PropertyRef Name="idLaw" />
+          </Key>
+          <Property Name="idLaw" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idClient" Type="Int32" />
+          <Property Name="DateIssue" Type="DateTime" Precision="0" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TPAuthority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idTypeCategory" Type="Int32" />
+          <NavigationProperty Name="CategoryType" Relationship="Self.FK_Law_CategoryType" FromRole="Law" ToRole="CategoryType" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="STS">
+          <Key>
+            <PropertyRef Name="idSTS" />
+          </Key>
+          <Property Name="idSTS" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="Int32" />
+          <Property Name="idCar" Type="Int32" />
+          <Property Name="STSNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_STS_Car" FromRole="STS" ToRole="Car" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_STS_Client" FromRole="STS" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Car_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STS_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="STS" Type="Self.STS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="idCar" />
+            </Principal>
+            <Dependent Role="STS">
+              <PropertyRef Name="idCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryType_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="CategoryType">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryType_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="CategoryType">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Law_CategoryType">
+          <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="0..1" />
+          <End Role="Law" Type="Self.Law" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryType">
+              <PropertyRef Name="idCategoryType" />
+            </Principal>
+            <Dependent Role="Law">
+              <PropertyRef Name="idTypeCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Law_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Law" Type="Self.Law" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="Law">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STS_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="STS" Type="Self.STS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="STS">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CTPBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Car" EntityType="Self.Car" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="CategoryType" EntityType="Self.CategoryType" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="contract" EntityType="Self.contract" />
+          <EntitySet Name="Law" EntityType="Self.Law" />
+          <EntitySet Name="STS" EntityType="Self.STS" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Car_Client" Association="Self.FK_Car_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STS_Car" Association="Self.FK_STS_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="STS" EntitySet="STS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryType_Category" Association="Self.FK_CategoryType_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryType" EntitySet="CategoryType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryType_Client" Association="Self.FK_CategoryType_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CategoryType" EntitySet="CategoryType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Law_CategoryType" Association="Self.FK_Law_CategoryType">
+            <End Role="CategoryType" EntitySet="CategoryType" />
+            <End Role="Law" EntitySet="Law" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Law_Client" Association="Self.FK_Law_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Law" EntitySet="Law" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STS_Client" Association="Self.FK_STS_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="STS" EntitySet="STS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities">
+          <EntitySetMapping Name="Car">
+            <EntityTypeMapping TypeName="CTPBDModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="idCar" ColumnName="idCar" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="StateNumber" ColumnName="StateNumber" />
+                <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="YearRelease" ColumnName="YearRelease" />
+                <ScalarProperty Name="EnginePower" ColumnName="EnginePower" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="BodyNumber" ColumnName="BodyNumber" />
+                <ScalarProperty Name="ChassisNumber" ColumnName="ChassisNumber" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="CTPBDModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryType">
+            <EntityTypeMapping TypeName="CTPBDModel.CategoryType">
+              <MappingFragment StoreEntitySet="CategoryType">
+                <ScalarProperty Name="idCategoryType" ColumnName="idCategoryType" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="CTPBDModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contract">
+            <EntityTypeMapping TypeName="CTPBDModel.contract">
+              <MappingFragment StoreEntitySet="contract">
+                <ScalarProperty Name="idContract" ColumnName="idContract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Law">
+            <EntityTypeMapping TypeName="CTPBDModel.Law">
+              <MappingFragment StoreEntitySet="Law">
+                <ScalarProperty Name="idLaw" ColumnName="idLaw" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="TPAuthority" ColumnName="TPAuthority" />
+                <ScalarProperty Name="idTypeCategory" ColumnName="idTypeCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STS">
+            <EntityTypeMapping TypeName="CTPBDModel.STS">
+              <MappingFragment StoreEntitySet="STS">
+                <ScalarProperty Name="idSTS" ColumnName="idSTS" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="idCar" ColumnName="idCar" />
+                <ScalarProperty Name="STSNumber" ColumnName="STSNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CTPBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
