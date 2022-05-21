@@ -27,17 +27,17 @@ namespace Insurance_Service.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
-        public Nullable<System.DateTime> BirthDay { get; set; }
+        public string BirthDay { get; set; }
         public string Number { get; set; }
         public string City { get; set; }
         public string Passport { get; set; }
-        public Nullable<int> IdClientData { get; set; }
+        public string Password { get; set; }
+        public string Login { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryType> CategoryType { get; set; }
-        public virtual ClientData ClientData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Law> Law { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -23,7 +23,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ChoosingUserPage : Page
     {
-        public ChoosingUserPage(Model.ClientData clientData)
+        public ChoosingUserPage(Client client)
         {
             InitializeComponent();
         }

@@ -24,5 +24,15 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
         }
+
+        private void clietAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ClientAddPage());
+        }
+
+        private void clientShow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

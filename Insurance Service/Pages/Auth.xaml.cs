@@ -29,8 +29,8 @@ namespace Insurance_Service.Pages
         }
         private void auth_Click(object sender, RoutedEventArgs e)
         {
-            Model.Admin admin = BD_Connection.db.Admin.FirstOrDefault(a=> a.Login == TBLogin.Text && a.Password == TBPassword.Password);
-            Model.ClientData clientData = BD_Connection.db.ClientData.FirstOrDefault(c=> c.Login == TBLogin.Text && c.Password == TBPassword.Password);
+            Model.Admin admin = BD_Connection.bd.Admin.FirstOrDefault(a=> a.Login == TBLogin.Text && a.Password == TBPassword.Text);
+            Model.Client clientData = BD_Connection.bd.Client.FirstOrDefault(c=> c.Login == TBLogin.Text && c.Password == TBPassword.Text);
             if (clientData != null)
             {
                 NavigationService.Navigate(new ChoosingUserPage(clientData));

@@ -51,24 +51,16 @@
           <Key>
             <PropertyRef Name="idClient" />
           </Key>
-          <Property Name="idClient" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="idClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-          <Property Name="BirthDay" Type="date" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="City" Type="nvarchar" MaxLength="50" />
-          <Property Name="Passport" Type="nvarchar" MaxLength="50" />
-          <Property Name="IdClientData" Type="int" />
-        </EntityType>
-        <EntityType Name="ClientData">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="idClient" Type="nvarchar" MaxLength="50" />
-          <Property Name="Login" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDay" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
@@ -144,18 +136,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Client_ClientData">
-          <End Role="ClientData" Type="Self.ClientData" Multiplicity="0..1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClientData">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="IdClientData" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Law_CategoryType">
           <End Role="CategoryType" Type="Self.CategoryType" Multiplicity="0..1" />
           <End Role="Law" Type="Self.Law" Multiplicity="*" />
@@ -210,7 +190,6 @@
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryType" EntityType="Self.CategoryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClientData" EntityType="Self.ClientData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contract" EntityType="Self.contract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Law" EntityType="Self.Law" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STS" EntityType="Self.STS" Schema="dbo" store:Type="Tables" />
@@ -226,10 +205,6 @@
           <AssociationSet Name="FK_CategoryType_Client" Association="Self.FK_CategoryType_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="CategoryType" EntitySet="CategoryType" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Client_ClientData" Association="Self.FK_Client_ClientData">
-            <End Role="ClientData" EntitySet="ClientData" />
-            <End Role="Client" EntitySet="Client" />
           </AssociationSet>
           <AssociationSet Name="FK_Law_CategoryType" Association="Self.FK_Law_CategoryType">
             <End Role="CategoryType" EntitySet="CategoryType" />
@@ -305,30 +280,20 @@
           <Key>
             <PropertyRef Name="idClient" />
           </Key>
-          <Property Name="idClient" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDay" Type="DateTime" Precision="0" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdClientData" Type="Int32" />
+          <Property Name="BirthDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Car_Client" FromRole="Client" ToRole="Car" />
           <NavigationProperty Name="CategoryType" Relationship="Self.FK_CategoryType_Client" FromRole="Client" ToRole="CategoryType" />
-          <NavigationProperty Name="ClientData" Relationship="Self.FK_Client_ClientData" FromRole="Client" ToRole="ClientData" />
           <NavigationProperty Name="Law" Relationship="Self.FK_Law_Client" FromRole="Client" ToRole="Law" />
           <NavigationProperty Name="STS" Relationship="Self.FK_STS_Client" FromRole="Client" ToRole="STS" />
-        </EntityType>
-        <EntityType Name="ClientData">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="idClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_ClientData" FromRole="ClientData" ToRole="Client" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
@@ -432,18 +397,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Client_ClientData">
-          <End Role="ClientData" Type="Self.ClientData" Multiplicity="0..1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClientData">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="IdClientData" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Law_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Law" Type="Self.Law" Multiplicity="*" />
@@ -468,13 +421,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CTPBDEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CTPBDEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admin" EntityType="Self.Admin" />
           <EntitySet Name="Car" EntityType="Self.Car" />
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="CategoryType" EntityType="Self.CategoryType" />
           <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="ClientData" EntityType="Self.ClientData" />
           <EntitySet Name="contract" EntityType="Self.contract" />
           <EntitySet Name="Law" EntityType="Self.Law" />
           <EntitySet Name="STS" EntityType="Self.STS" />
@@ -499,10 +451,6 @@
             <End Role="CategoryType" EntitySet="CategoryType" />
             <End Role="Law" EntitySet="Law" />
           </AssociationSet>
-          <AssociationSet Name="FK_Client_ClientData" Association="Self.FK_Client_ClientData">
-            <End Role="ClientData" EntitySet="ClientData" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
           <AssociationSet Name="FK_Law_Client" Association="Self.FK_Law_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Law" EntitySet="Law" />
@@ -517,7 +465,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities5">
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="CTPBDModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -575,17 +523,8 @@
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Passport" ColumnName="Passport" />
-                <ScalarProperty Name="IdClientData" ColumnName="IdClientData" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientData">
-            <EntityTypeMapping TypeName="CTPBDModel.ClientData">
-              <MappingFragment StoreEntitySet="ClientData">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idClient" ColumnName="idClient" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

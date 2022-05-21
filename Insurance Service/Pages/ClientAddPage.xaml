@@ -14,16 +14,75 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Label Content="Client Add" FontFamily="Ubuntu" FontSize="23" Margin="0,10,0,0"/>
         <StackPanel Grid.Column="0" Width="300" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox Height="40"/>
-            <TextBox Height="40"/>
+            <TextBox
+                  x:Name="TBLogin"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Login"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15"/>
+            <TextBox
+                  x:Name="TBPassword"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Password"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15"/>
+            <TextBox
+                  x:Name="TBPasswordReturn"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Return Password"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Width="300" Height="250" VerticalAlignment="Center">
-            <TextBox Height="40" x:Name="TBName"/>
-            <TextBox Height="40" x:Name="TBLastName"/>
-            <TextBox Height="40" x:Name="TBFullName"/>
-            <TextBox Height="40"/>
-            <Button Height="30"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Width="300" Height="400" VerticalAlignment="Center" Margin="0,20,0,0">
+            <TextBlock Text="client dont save" FontFamily="Ubuntu Medium" FontSize="15" x:Name="clientVerificated" MouseLeftButtonDown="clientVerificated_MouseLeftButtonDown"/>
+            <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="CLIENT" x:Name="Bclient" Click="Bclient_Click"/>
+            <TextBox
+                  x:Name="TBPassport"
+                  MaxLength="10"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Passport"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" PreviewTextInput="TBPassport_PreviewTextInput"/>
+            <DatePicker
+                Margin="0,20,0,0"
+                x:Name="BithDay"
+                DisplayDateStart="1/01/1945"
+                DisplayDateEnd="1/12/2004"
+                DisplayDate="1/01/1999"
+                material:HintAssist.Hint="Pick Date"
+                material:HintAssist.HelperText="Helper text"
+                Style="{StaticResource MaterialDesignFilledDatePicker}" />
+            <TextBox
+                  x:Name="TBCity"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="City"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15"/>
+            
+            <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER" x:Name="Bsave" Click="Bsave_Click"/>
+            <TextBlock FontFamily="Ubuntu Light" FontSize="23" Margin="0,10,0,0" Text="Back" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
     </Grid>
 </Page>
