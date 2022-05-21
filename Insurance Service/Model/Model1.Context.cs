@@ -13,10 +13,10 @@ namespace Insurance_Service.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CTPBDEntities : DbContext
+    public partial class CTPBDEntities1 : DbContext
     {
-        public CTPBDEntities()
-            : base("name=CTPBDEntities")
+        public CTPBDEntities1()
+            : base("name=CTPBDEntities1")
         {
         }
     
@@ -25,10 +25,12 @@ namespace Insurance_Service.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<Car> Car { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<CategoryType> CategoryType { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<ClientData> ClientData { get; set; }
         public virtual DbSet<contract> contract { get; set; }
         public virtual DbSet<Law> Law { get; set; }
         public virtual DbSet<STS> STS { get; set; }

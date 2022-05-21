@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Insurance_Service.Model;
+using Insurance_Service.CurrentData;
+using Insurance_Service.Pages;
 
 namespace Insurance_Service.Pages
 {
@@ -23,6 +26,25 @@ namespace Insurance_Service.Pages
         public Auth()
         {
             InitializeComponent();
+        }
+        private void auth_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Admin admin = BD_Connection.db.Admin.FirstOrDefault(a=> a.Login == TBLogin.Text && a.Password == TBPassword.Password);
+            Model.ClientData clientData = BD_Connection.db.ClientData.FirstOrDefault(c=> c.Login == TBLogin.Text && c.Password == TBPassword.Password);
+            if (clientData != null)
+            {
+                NavigationService.Navigate(new ChoosingUserPage(clientData));
+                MessageBox.Show("welcome");
+            }
+            else if(admin != null)
+            {
+                NavigationService.Navigate(new ChoosingActionPage());
+                MessageBox.Show("welcome: " + admin.Name);
+            }
+            else
+            {
+                MessageBox.Show("error");
+            }
         }
     }
 }

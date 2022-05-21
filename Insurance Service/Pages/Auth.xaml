@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Insurance_Service.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Auth" Background="White">
+      Title="Auth" Background="White"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +21,7 @@
             <TextBox Height="30" x:Name="TBLogin"/>
             <Label Content="Password" Margin="0,20,0,0"/>
             <PasswordBox Height="30" x:Name="TBPassword"/>
-            <Button Background="Blue" Height="45" Margin="0,20,0,0" Content="ENTER"/>
+            <Button Background="Blue" Height="45" Margin="0,20,0,0" Content="ENTER" x:Name="auth" Click="auth_Click"/>
         </StackPanel>
     </Grid>
 </Page>
