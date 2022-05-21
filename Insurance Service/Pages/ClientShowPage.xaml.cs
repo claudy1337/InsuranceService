@@ -12,32 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Insurance_Service.CurrentData;
 
 namespace Insurance_Service.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ChoosingActionPage.xaml
+    /// Логика взаимодействия для ClientShowPage.xaml
     /// </summary>
-    public partial class ChoosingActionPage : Page
+    public partial class ClientShowPage : Page
     {
-        public ChoosingActionPage()
+        public ClientShowPage()
         {
             InitializeComponent();
+            Refresh(); 
         }
 
-        private void clietAdd_Click(object sender, RoutedEventArgs e)
+        private void BSearchUser_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ClientAddPage());
-        }
 
-        private void clientShow_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ClientShowPage());
         }
-
-        private void carAdd_Click(object sender, RoutedEventArgs e)
+        public void Refresh()
         {
-            NavigationService.Navigate(new AddCar());
+            ltv.ItemsSource = null;
+            ltv.ItemsSource = BD_Connection.bd.Client.ToList();
+        }
+        private void ltv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
         }
     }
 }

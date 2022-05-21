@@ -10,7 +10,7 @@ namespace Insurance_Service.Car
     {
         public string id { get; set; }
         public string name { get; set; }
-        public string group { get; set; }
+        public List<string> items = new List<string>();
 
     }
 }

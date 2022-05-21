@@ -13,6 +13,7 @@
             <Label Content="Insurance" HorizontalAlignment="Center" FontSize="24"/>
             <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="Client Add" x:Name="clietAdd" Click="clietAdd_Click"/>
             <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="Client Show" x:Name="clientShow" Click="clientShow_Click"/>
+            <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="Client Show" x:Name="carAdd" Click="carAdd_Click"/>
         </StackPanel>
     </Grid>
 </Page>
