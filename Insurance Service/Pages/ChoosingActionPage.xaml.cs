@@ -39,5 +39,15 @@ namespace Insurance_Service.Pages
         {
             NavigationService.Navigate(new AddCar());
         }
+
+        private void carShow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LawAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CreateLaw());
+        }
     }
 }

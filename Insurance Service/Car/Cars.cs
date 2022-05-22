@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Insurance_Service.Car
 {
-    public class Cars
+    public static class Cars
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public List<string> items = new List<string>();
+        public static string id { get; set; }
+        public static string name { get; set; }
+        public static List<string> items = new List<string>();
 
     }
 }

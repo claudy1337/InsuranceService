@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Insurance_Service.Car;
 
 namespace Insurance_Service.Pages
 {
@@ -23,6 +24,9 @@ namespace Insurance_Service.Pages
         public AddCar()
         {
             InitializeComponent();
+            MessageBox.Show(Cars.id);
+           // type.ItemsSource = Cars.items;
+            cars.Text = Cars.id;
         }
     }
 }

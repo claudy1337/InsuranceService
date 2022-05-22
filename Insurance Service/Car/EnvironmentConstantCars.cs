@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
 using Newtonsoft.Json;
-
+using System.Text.Json;
 
 namespace Insurance_Service.Car
 {
@@ -16,7 +16,7 @@ namespace Insurance_Service.Car
         public void Provide(out EnvironmentConstantCars enObject)
         {
             string jsonObject = File.ReadAllText(_nameJsonFile);
-            enObject = JsonSerializer.Deserialize<EnvironmentConstantCars>(jsonObject);
+            enObject = System.Text.Json.JsonSerializer.Deserialize<EnvironmentConstantCars>(jsonObject);
         }
     }
 }

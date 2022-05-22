@@ -12,18 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Insurance_Service.Model;
-using Insurance_Service.Pages;
-using Insurance_Service.CurrentData;
 
 namespace Insurance_Service.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ChoosingUserPage.xaml
+    /// Логика взаимодействия для CreateLaw.xaml
     /// </summary>
-    public partial class ChoosingUserPage : Page
+    public partial class CreateLaw : Page
     {
-        public ChoosingUserPage(Client client)
+        public CreateLaw()
         {
             InitializeComponent();
         }
