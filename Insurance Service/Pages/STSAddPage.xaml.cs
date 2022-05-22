@@ -26,7 +26,7 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
-           // CBCar.ItemsSource = BD_Connection.bd.
+            CBCar.ItemsSource = BD_Connection.bd.Car.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,6 +41,7 @@ namespace Insurance_Service.Pages
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
+            CBCar.Text = null;
             var car = CBCar.SelectedItem as Model.Car;
             var client = CBClient.SelectedItem as Model.Client;
             if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
@@ -76,6 +77,24 @@ namespace Insurance_Service.Pages
         private void BBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.GoBack(); 
+        }
+
+        private void CBCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            var client =CBClient.SelectedItem as Client;
+            if (client != null)
+            {
+                CBCar.ItemsSource = BD_Connection.bd.Car.Where(x => x.IdClient == client.idClient).ToList();
+            }
+            else
+            {
+                CBCar.Text = null;
+            }
+
+
+               
+            
         }
     }
 }

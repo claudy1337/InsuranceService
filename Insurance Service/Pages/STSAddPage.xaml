@@ -41,9 +41,10 @@
       Grid.Column="1"
       Click="Button_Click_1" />
                 <ComboBox
+    SelectionChanged="CBCar_SelectionChanged"
     Text="{Binding Path=idCar}"
     x:Name="CBCar"
-    DisplayMemberPath="idCar"
+   DisplayMemberPath="idCar"
     Style="{StaticResource MaterialDesignFilledComboBox}"
     IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
     material:HintAssist.Hint="Car"
