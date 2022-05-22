@@ -11,13 +11,6 @@
       xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
-        <ListView x:Name="type">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding iems}" FontSize="23"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <TextBox x:Name="cars"/>
-        </ListView>
+        
     </Grid>
 </Page>

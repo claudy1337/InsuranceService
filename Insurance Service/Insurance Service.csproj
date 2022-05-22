@@ -118,8 +118,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Car\EnvironmentConstantCars.cs" />
-    <Compile Include="Car\InitializeCars.cs" />
     <Compile Include="CurrentData\CurrentUser.cs" />
     <Compile Include="Model\Admin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -226,6 +224,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\STSShowPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\Auth.xaml.cs">
@@ -249,6 +251,9 @@
     <Compile Include="Pages\STSAddPage.xaml.cs">
       <DependentUpon>STSAddPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\STSShowPage.xaml.cs">
+      <DependentUpon>STSShowPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -266,6 +271,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Car\Car.json" />
     <None Include="Car\cars.json" />
     <None Include="Car\carsStat.json" />
     <None Include="Car\full.json" />

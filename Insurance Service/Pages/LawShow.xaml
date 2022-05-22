@@ -11,12 +11,12 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="190"/>
             <ColumnDefinition Width="500"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical">
-            <ListView Width="100" Height="445" x:Name="lst">
+            <ListView Width="110" Height="445" x:Name="lst">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <material:Card
@@ -26,7 +26,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Background="#388F72" Content="Search"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" Grid.Column="1">
             <Image Source="/Assets/user.png" Margin="20,40,20,0"/>
@@ -40,7 +39,7 @@
                   material:HintAssist.Hint="signatures"
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
-            <TextBlock Text="Back" FontFamily="Ubuntu Medium" FontSize="24" Margin="20,10,0,0"/>
+            <TextBlock Text="Back" FontFamily="Ubuntu Medium" FontSize="24" Margin="20,10,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <StackPanel Orientation="Horizontal" Grid.Column="1">

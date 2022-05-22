@@ -27,6 +27,8 @@
       Click="Button_Click" />
                 </Grid>
                 <ComboBox
+    Text="{Binding Path=Name}"
+                    DisplayMemberPath="Name"
     x:Name="CBClient"
     Style="{StaticResource MaterialDesignFilledComboBox}"
     IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
@@ -39,6 +41,7 @@
       Grid.Column="1"
       Click="Button_Click_1" />
                 <ComboBox
+    Text="{Binding Path=Title}"
     x:Name="CBCar"
     Style="{StaticResource MaterialDesignFilledComboBox}"
     IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"

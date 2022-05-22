@@ -52,7 +52,7 @@ namespace Insurance_Service.Pages
 
         private void LawShow_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new LawShow());
         }
 
         private void STSAdd_Click(object sender, RoutedEventArgs e)

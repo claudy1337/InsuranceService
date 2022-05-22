@@ -25,6 +25,8 @@ namespace Insurance_Service.Pages
         public STSAddPage()
         {
             InitializeComponent();
+            CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
+            CBCar.ItemsSource = BD_Connection.bd.Category.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
