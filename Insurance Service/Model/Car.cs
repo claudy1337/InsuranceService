@@ -27,6 +27,7 @@ namespace Insurance_Service.Model
         public string VIN { get; set; }
         public int IdClient { get; set; }
         public string Color { get; set; }
+        public Nullable<int> idModel { get; set; }
     
         public virtual brand brand { get; set; }
         public virtual Client Client { get; set; }
@@ -34,5 +35,6 @@ namespace Insurance_Service.Model
         public virtual ICollection<contract> contract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STS> STS { get; set; }
+        public virtual Model Model { get; set; }
     }
 }

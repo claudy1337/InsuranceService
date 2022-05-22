@@ -14,10 +14,18 @@ namespace Insurance_Service.Model
     
     public partial class Model
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Model()
+        {
+            this.Car = new HashSet<Car>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> idBrands { get; set; }
         public string Name { get; set; }
     
         public virtual brand brand { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Car> Car { get; set; }
     }
 }

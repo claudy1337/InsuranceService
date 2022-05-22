@@ -21,6 +21,7 @@
         <AssociationConnector Association="CTPBDModel.FK_STS_Car" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Law_Client" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_STS_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="CTPBDModel.FK_Car_Model" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

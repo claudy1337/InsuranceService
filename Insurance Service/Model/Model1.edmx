@@ -31,6 +31,7 @@
           <Property Name="VIN" Type="nchar" MaxLength="10" />
           <Property Name="IdClient" Type="int" Nullable="false" />
           <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="idModel" Type="int" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -124,6 +125,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Car_Model">
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="idModel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_contract_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
           <End Role="contract" Type="Self.contract" Multiplicity="*" />
@@ -202,6 +215,10 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
+          <AssociationSet Name="FK_Car_Model" Association="Self.FK_Car_Model">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
           <AssociationSet Name="FK_contract_Car" Association="Self.FK_contract_Car">
             <End Role="Car" EntitySet="Car" />
             <End Role="contract" EntitySet="contract" />
@@ -259,6 +276,8 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_Car_Client" FromRole="Car" ToRole="Client" />
           <NavigationProperty Name="contract" Relationship="Self.FK_contract_Car" FromRole="Car" ToRole="contract" />
           <NavigationProperty Name="STS" Relationship="Self.FK_STS_Car" FromRole="Car" ToRole="STS" />
+          <Property Name="idModel" Type="Int32" />
+          <NavigationProperty Name="Model" Relationship="CTPBDModel.FK_Car_Model" FromRole="Car" ToRole="Model" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -314,6 +333,7 @@
           <Property Name="idBrands" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="brand" Relationship="Self.FK_Model_brand" FromRole="Model" ToRole="brand" />
+          <NavigationProperty Name="Car" Relationship="CTPBDModel.FK_Car_Model" FromRole="Model" ToRole="Car" />
         </EntityType>
         <EntityType Name="STS">
           <Key>
@@ -458,7 +478,23 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="STS" EntitySet="STS" />
           </AssociationSet>
+          <AssociationSet Name="FK_Car_Model" Association="CTPBDModel.FK_Car_Model">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Car_Model">
+          <End Type="CTPBDModel.Model" Role="Model" Multiplicity="0..1" />
+          <End Type="CTPBDModel.Car" Role="Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="idModel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -486,6 +522,7 @@
           <EntitySetMapping Name="Car">
             <EntityTypeMapping TypeName="CTPBDModel.Car">
               <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="idModel" ColumnName="idModel" />
                 <ScalarProperty Name="idCar" ColumnName="idCar" />
                 <ScalarProperty Name="StateNumber" ColumnName="StateNumber" />
                 <ScalarProperty Name="idBrand" ColumnName="idBrand" />

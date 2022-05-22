@@ -37,7 +37,7 @@ namespace Insurance_Service.Pages
 
         private void carAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddCar());
+            NavigationService.Navigate(new CarAdd());
         }
 
         private void carShow_Click(object sender, RoutedEventArgs e)

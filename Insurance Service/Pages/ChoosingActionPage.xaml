@@ -17,8 +17,7 @@
             <Button Background="#388F72" Height="45" Margin="20,20,20,0" Content="Client Add" x:Name="clietAdd" Click="clietAdd_Click"/>
             <Button Background="#388F72" Height="45" Margin="20,20,20,0" Content="Car Add" x:Name="carAdd" Click="carAdd_Click"/>
             <Button Background="#388F72" Height="45" Margin="20,20,20,0" Content="Law Add" x:Name="LawAdd" Click="LawAdd_Click" />
-            <Button Background="#388F72" Height="45" Margin="20,20,20,0" Content="STS Add" x:Name="STSAdd" Click="STSAdd_Click" />
-
+            <Button Background="#388F72" Height="45" Margin="20,20,20,0" Content="STS Add" x:Name="STSAdd" Click="STSAdd_Click" Cursor="Hand" />
         </StackPanel>
         <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical">
             <Button Background="#388F72" Height="45" Margin="20,20,20,0" Content="Client Show" x:Name="clientShow" Click="clientShow_Click"/>

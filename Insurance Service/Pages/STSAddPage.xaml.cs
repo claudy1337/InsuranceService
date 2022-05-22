@@ -26,7 +26,7 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
-            
+           // CBCar.ItemsSource = BD_Connection.bd.
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,12 +41,36 @@ namespace Insurance_Service.Pages
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-
+            var car = CBCar.SelectedItem as Model.Car;
+            var client = CBClient.SelectedItem as Model.Client;
+            if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
+            {
+                Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s=> s.STSNumber == TBNumber.Text);
+                if (sts == null)
+                {
+                    Model.STS stsCreate = new Model.STS()
+                    {
+                        idCar = car.idCar,
+                        idClient = client.idClient,
+                        STSNumber = TBNumber.Text
+                    };
+                    BD_Connection.bd.STS.Add(stsCreate);
+                    BD_Connection.bd.SaveChanges();
+                    MessageBox.Show("sts save");
+                    Refresh();
+                }
+               
+            }
         }
-
+        public void Refresh()
+        {
+            CBClient.Text = null;
+            CBCar.Text = null;
+            TBNumber.Text = null;
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddCar());
+            NavigationService.Navigate(new CarAdd());
         }
 
         private void BBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
