@@ -18,7 +18,6 @@ namespace Insurance_Service.Model
         public Client()
         {
             this.Car = new HashSet<Car>();
-            this.CategoryType = new HashSet<CategoryType>();
             this.Law = new HashSet<Law>();
             this.STS = new HashSet<STS>();
         }
@@ -36,8 +35,6 @@ namespace Insurance_Service.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Car { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryType> CategoryType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Law> Law { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

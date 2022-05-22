@@ -17,9 +17,10 @@
             <ColumnDefinition Width="500"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-            <Image Source="/Assets/user.png" Margin="20,40,20,0"/>
+            <Image Source="/Assets/user.png" x:Name="usrImage" Margin="20,40,20,0" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
             <TextBox
                   x:Name="TBSignature"
+                  MaxLength="12"
                   Margin="20,50,20,0"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
@@ -30,34 +31,32 @@
                   FontSize="15"/>
             <TextBlock Text="Back" FontFamily="Ubuntu Medium" FontSize="24" Margin="20,10,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="1">
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,30,0,0">
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <ComboBox Width="190" x:Name="usr" Height="35" Margin="60,20,0,0"/>
+                <ComboBox Width="190" x:Name="usr" Text="{Binding Path=Login}" DisplayMemberPath="Login" Height="35" Margin="60,20,0,0"/>
                 <TextBlock Text="Client Add" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
             </StackPanel>
             
             <DatePicker
                 Margin="60,20,60,0"
                 x:Name="DateIssue"
-                DisplayDateStart="1/01/1945"
-                DisplayDateEnd="1/12/2004"
-                DisplayDate="1/01/1999"
+                DisplayDateStart="1/01/2018"
+                DisplayDateEnd="1/06/2022"
+                DisplayDate="1/05/2022"
                 material:HintAssist.Hint="Date Issue"
-               
                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
             <DatePicker
                 Margin="60,20,60,0"
                 x:Name="DateEnd"
-                IsEnabled="False"
-                DisplayDateStart="1/01/1945"
-                DisplayDateEnd="1/12/2004"
-                DisplayDate="1/01/1999"
-                material:HintAssist.Hint="Date End"
-
+                DisplayDateStart="1/01/2020"
+                DisplayDateEnd="1/01/2025"
+                DisplayDate="1/01/2022"
+                material:HintAssist.Hint="Date Issue"
                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
             <TextBox
                   x:Name="TBTPAuthority"
+                  MaxLength="4"
                   Margin="60,20,60,0"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
@@ -65,9 +64,10 @@
                   material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                   material:HintAssist.Hint="TP Auth"
                   FontFamily="Ubuntu Light"
-                  FontSize="15"/>
+                  FontSize="15" PreviewTextInput="tpNumber"/>
             <TextBox
                   x:Name="TBNumber"
+                  MaxLength="10"
                   Margin="60,20,60,0"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
@@ -75,11 +75,15 @@
                   material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                   material:HintAssist.Hint="Number"
                   FontFamily="Ubuntu Light"
-                  FontSize="15"/>
-            <ComboBox x:Name="Category">
-                
-            </ComboBox>
-            <Button Background="#388F72" Height="35" Margin="60,20,60,0" Content="SAVE" x:Name="save" Click="save_Click"/>
+                  FontSize="15" PreviewTextInput="TBNumbers" Cursor="Arrow"/>
+            <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Center">
+                <CheckBox x:Name="CheckA" Content="A" Margin="0,0,10,0"/>
+                <CheckBox x:Name="CheckB"  Content="B" Margin="0,0,10,0"/>
+                <CheckBox x:Name="CheckC" Content="C" Margin="0,0,10,0"/>
+                <CheckBox x:Name="CheckD" Content="D" Margin="0,0,10,0"/>
+                <CheckBox x:Name="CheckC1E" Content="C1E" Margin="0,0,10,0"/>
+            </StackPanel>
+            <Button Background="#388F72" Height="35" Margin="60,0,60,0" Content="SAVE" x:Name="save" Click="save_Click"/>
         </StackPanel>
     </Grid>
 </Page>

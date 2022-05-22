@@ -16,19 +16,19 @@
             <ColumnDefinition Width="500"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical">
-            <ListView Width="110" Height="445" x:Name="lst">
+            <ListView Width="110" Height="445" x:Name="lst" SelectionChanged="lst_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <material:Card
                     material:ShadowAssist.ShadowDepth="Depth5"
                     Width="90"
-                    Content="{Binding Login}"/>
+                    Content="{Binding Client.Login}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" Grid.Column="1">
-            <Image Source="/Assets/user.png" Margin="20,40,20,0"/>
+            <Image Source="/Assets/user.png" x:Name="usrImage"  Margin="20,40,20,0"/>
             <TextBox
                   x:Name="TBSignature"
                   Margin="20,50,20,0"
@@ -43,12 +43,22 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <ComboBox Width="190" x:Name="CBClient" Text="{Binding Path=Passport}"
-                    DisplayMemberPath="Name" Height="35" Margin="60,20,0,0"/>
+                
                 <TextBlock Text="Client Add" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" />
             </StackPanel>
-
+            <TextBox
+                  x:Name="TBIdClient"
+                  Margin="60,20,60,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Client"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15"/>
+            
             <DatePicker
+                IsEnabled="False"
                 Margin="60,20,60,0"
                 x:Name="DateIssue"
                 DisplayDateStart="1/01/1945"
@@ -69,6 +79,7 @@
                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
             <TextBox
+                IsEnabled="False"
                   x:Name="TBTPAuthority"
                   Margin="60,20,60,0"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -88,9 +99,7 @@
                   material:HintAssist.Hint="Number"
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
-            <ComboBox x:Name="Category">
-
-            </ComboBox>
+            
             <Button Background="#388F72" Height="35" Margin="60,20,60,0" Content="EDIT" x:Name="EDIT" />
         </StackPanel>
     </Grid>

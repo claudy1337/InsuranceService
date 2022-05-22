@@ -12,21 +12,12 @@ namespace Insurance_Service.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CategoryType
+    public partial class Model
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CategoryType()
-        {
-            this.Law = new HashSet<Law>();
-        }
+        public int id { get; set; }
+        public Nullable<int> idBrands { get; set; }
+        public string Name { get; set; }
     
-        public int idCategoryType { get; set; }
-        public Nullable<int> idClient { get; set; }
-        public Nullable<int> idCategory { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Client Client { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Law> Law { get; set; }
+        public virtual brand brand { get; set; }
     }
 }

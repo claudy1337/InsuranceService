@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Insurance_Service.Model;
 using Insurance_Service.CurrentData;
+using Insurance_Service.Assets;
 
 namespace Insurance_Service.Pages
 {
@@ -25,8 +26,8 @@ namespace Insurance_Service.Pages
         public LawShow()
         {
             InitializeComponent();
-            lst.ItemsSource = BD_Connection.bd.Client.ToList();
-            CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
+            lst.ItemsSource = BD_Connection.bd.Law.ToList();
+           
         }
 
         private void EDIT_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,27 @@ namespace Insurance_Service.Pages
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            usrImage.Source = null;
+            var selected = lst.SelectedItem as Model.Law;
+            TBNumber.Text = selected.Number; 
+            TBIdClient.Text = string.Join(selected.Client.Name, " ", selected.Client.FullName, " ", selected.idClient);
+            DateIssue.Text = selected.DateIssue.ToString();
+            DateEnd.Text = selected.DateEnd.ToString();
+            TBTPAuthority.Text = selected.TPAuthority;
+            TBSignature.Text = selected.Region;
+            if (selected.image == "")
+            {
+                usrImage.Source = null;
+                
+            }
+            else if (selected.image != null)
+            {
+                usrImage.Source = new BitmapImage(new Uri(selected.image, UriKind.RelativeOrAbsolute));
+            }
         }
     }
 }

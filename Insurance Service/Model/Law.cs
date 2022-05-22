@@ -21,9 +21,9 @@ namespace Insurance_Service.Model
         public System.DateTime DateEnd { get; set; }
         public string Region { get; set; }
         public string TPAuthority { get; set; }
-        public Nullable<int> idTypeCategory { get; set; }
+        public string Category { get; set; }
+        public string image { get; set; }
     
-        public virtual CategoryType CategoryType { get; set; }
         public virtual Client Client { get; set; }
     }
 }

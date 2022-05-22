@@ -13,10 +13,10 @@ namespace Insurance_Service.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CTPBDEntities6 : DbContext
+    public partial class CTPBDEntities7 : DbContext
     {
-        public CTPBDEntities6()
-            : base("name=CTPBDEntities6")
+        public CTPBDEntities7()
+            : base("name=CTPBDEntities7")
         {
         }
     
@@ -26,12 +26,12 @@ namespace Insurance_Service.Model
         }
     
         public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<brand> brand { get; set; }
         public virtual DbSet<Car> Car { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<CategoryType> CategoryType { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<contract> contract { get; set; }
         public virtual DbSet<Law> Law { get; set; }
+        public virtual DbSet<Model> Model { get; set; }
         public virtual DbSet<STS> STS { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }

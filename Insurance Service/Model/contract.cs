@@ -15,5 +15,13 @@ namespace Insurance_Service.Model
     public partial class contract
     {
         public int idContract { get; set; }
+        public Nullable<int> idCar { get; set; }
+        public Nullable<int> MinSumm { get; set; }
+        public Nullable<int> MaxSumm { get; set; }
+        public Nullable<int> Experience { get; set; }
+        public Nullable<int> ProcentAccidents { get; set; }
+        public Nullable<int> Price { get; set; }
+    
+        public virtual Car Car { get; set; }
     }
 }
