@@ -46,6 +46,7 @@
                   material:HintAssist.Hint="Return Password"
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
+           
         </StackPanel>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" Width="300" Height="400" VerticalAlignment="Center" Margin="0,20,0,0">
             <TextBlock Text="client dont save" FontFamily="Ubuntu Medium" FontSize="15" x:Name="clientVerificated" MouseLeftButtonDown="clientVerificated_MouseLeftButtonDown"/>

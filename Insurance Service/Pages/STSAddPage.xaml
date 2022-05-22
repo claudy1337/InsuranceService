@@ -1,0 +1,61 @@
+﻿<Page x:Class="Insurance_Service.Pages.STSAddPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Insurance_Service.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="STSAddPage" Background="White"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Grid>
+        <TextBlock Text="STS ADD" FontFamily="Ubuntu" Margin="20" FontSize="30"/>
+        <StackPanel Orientation="Vertical" Height="320" Width="350">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+      Content="Client Add"
+      Style="{StaticResource MaterialDesignFlatButton}"
+      HorizontalAlignment="Right"
+      Grid.Column="1"
+      Click="Button_Click" />
+                </Grid>
+                <ComboBox
+    x:Name="CBClient"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Client"
+    Width="256" Loaded="CBClient_Loaded"/>
+                <Button
+      Content="Car Add"
+      Style="{StaticResource MaterialDesignFlatButton}"
+      HorizontalAlignment="Right"
+      Grid.Column="1"
+      Click="Button_Click_1" />
+                <ComboBox
+    x:Name="CBCar"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Car"
+    Width="256" Loaded="CBClient_Loaded"/>
+                <TextBox
+                  x:Name="TBNumber"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Number"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="255"/>
+                <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="SAVE" x:Name="save" Click="save_Click" />
+                <TextBlock Text="Back" FontSize="15" Margin="10" FontFamily="Ubuntu Medium" x:Name="BBack" MouseLeftButtonDown="BBack_MouseLeftButtonDown"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

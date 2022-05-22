@@ -14,11 +14,11 @@ namespace Insurance_Service.Model
     
     public partial class Law
     {
-        public string idLaw { get; set; }
-        public Nullable<int> idClient { get; set; }
-        public Nullable<System.DateTime> DateIssue { get; set; }
+        public int idLaw { get; set; }
+        public int idClient { get; set; }
+        public System.DateTime DateIssue { get; set; }
         public string Number { get; set; }
-        public Nullable<System.DateTime> DateEnd { get; set; }
+        public System.DateTime DateEnd { get; set; }
         public string Region { get; set; }
         public string TPAuthority { get; set; }
         public Nullable<int> idTypeCategory { get; set; }

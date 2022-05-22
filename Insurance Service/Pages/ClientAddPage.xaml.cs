@@ -22,7 +22,6 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ClientAddPage : Page
     {
-        Model.CTPBDEntities5 ew = new Model.CTPBDEntities5();
         public ClientAddPage()
         {
             InitializeComponent();
@@ -100,5 +99,6 @@ namespace Insurance_Service.Pages
         {
             Refresh();
         }
+
     }
 }

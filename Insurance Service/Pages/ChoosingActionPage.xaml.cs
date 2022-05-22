@@ -42,12 +42,27 @@ namespace Insurance_Service.Pages
 
         private void carShow_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new CarShow());
         }
 
         private void LawAdd_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new CreateLaw());
+        }
+
+        private void LawShow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void STSAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new STSAddPage());
+        }
+
+        private void STSShow_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

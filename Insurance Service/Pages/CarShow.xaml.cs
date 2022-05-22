@@ -12,19 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Insurance_Service.Car;
 
 namespace Insurance_Service.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddCar.xaml
+    /// Логика взаимодействия для CarShow.xaml
     /// </summary>
-    public partial class AddCar : Page
+    public partial class CarShow : Page
     {
-        public AddCar()
+        public CarShow()
         {
             InitializeComponent();
-            
+        }
+
+        private void BBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

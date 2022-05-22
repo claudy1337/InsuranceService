@@ -148,13 +148,13 @@
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Model1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Model1.Designer.cs">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\STS.cs">
@@ -165,6 +165,9 @@
     </Compile>
     <Compile Include="Pages\AddCar.xaml.cs">
       <DependentUpon>AddCar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CarShow.xaml.cs">
+      <DependentUpon>CarShow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ClientInformationPage.xaml.cs">
       <DependentUpon>ClientInformationPage.xaml</DependentUpon>
@@ -191,6 +194,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CarShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ChoosingActionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +218,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\LawShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\STSAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\Auth.xaml.cs">
@@ -227,6 +242,12 @@
     </Compile>
     <Compile Include="Pages\CreateLaw.xaml.cs">
       <DependentUpon>CreateLaw.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LawShow.xaml.cs">
+      <DependentUpon>LawShow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\STSAddPage.xaml.cs">
+      <DependentUpon>STSAddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -269,6 +290,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\user.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -276,11 +299,10 @@
     </Content>
     <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -12,19 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Insurance_Service.Car;
+using Insurance_Service.Model;
+using Insurance_Service.CurrentData;
 
 namespace Insurance_Service.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddCar.xaml
+    /// Логика взаимодействия для LawShow.xaml
     /// </summary>
-    public partial class AddCar : Page
+    public partial class LawShow : Page
     {
-        public AddCar()
+        public LawShow()
         {
             InitializeComponent();
-            
+            lst.ItemsSource = BD_Connection.bd.Client.ToList();
+        }
+
+        private void EDIT_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

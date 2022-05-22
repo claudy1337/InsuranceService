@@ -33,8 +33,8 @@ namespace Insurance_Service.Pages
             Model.Client clientData = BD_Connection.bd.Client.FirstOrDefault(c=> c.Login == TBLogin.Text && c.Password == TBPassword.Text);
             if (clientData != null)
             {
-                NavigationService.Navigate(new ChoosingUserPage(clientData));
-                MessageBox.Show("welcome");
+                
+                MessageBox.Show("welcome: " + clientData.Name);
             }
             else if(admin != null)
             {

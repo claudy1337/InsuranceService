@@ -72,20 +72,20 @@
           <Key>
             <PropertyRef Name="idLaw" />
           </Key>
-          <Property Name="idLaw" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="idClient" Type="int" />
-          <Property Name="DateIssue" Type="date" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateEnd" Type="date" />
-          <Property Name="Region" Type="nvarchar" MaxLength="50" />
-          <Property Name="TPAuthority" Type="nvarchar" MaxLength="50" />
+          <Property Name="idLaw" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="DateIssue" Type="date" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TPAuthority" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idTypeCategory" Type="int" />
         </EntityType>
         <EntityType Name="STS">
           <Key>
             <PropertyRef Name="idSTS" />
           </Key>
-          <Property Name="idSTS" Type="int" Nullable="false" />
+          <Property Name="idSTS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idClient" Type="int" />
           <Property Name="idCar" Type="int" />
           <Property Name="STSNumber" Type="nvarchar" MaxLength="50" />
@@ -149,7 +149,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Law_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Law" Type="Self.Law" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -305,13 +305,13 @@
           <Key>
             <PropertyRef Name="idLaw" />
           </Key>
-          <Property Name="idLaw" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="idClient" Type="Int32" />
-          <Property Name="DateIssue" Type="DateTime" Precision="0" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateEnd" Type="DateTime" Precision="0" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TPAuthority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idLaw" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="DateIssue" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TPAuthority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="idTypeCategory" Type="Int32" />
           <NavigationProperty Name="CategoryType" Relationship="Self.FK_Law_CategoryType" FromRole="Law" ToRole="CategoryType" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
@@ -320,7 +320,7 @@
           <Key>
             <PropertyRef Name="idSTS" />
           </Key>
-          <Property Name="idSTS" Type="Int32" Nullable="false" />
+          <Property Name="idSTS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idClient" Type="Int32" />
           <Property Name="idCar" Type="Int32" />
           <Property Name="STSNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -398,7 +398,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Law_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Law" Type="Self.Law" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -421,7 +421,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CTPBDEntities5" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CTPBDEntities6" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admin" EntityType="Self.Admin" />
           <EntitySet Name="Car" EntityType="Self.Car" />
           <EntitySet Name="Category" EntityType="Self.Category" />
@@ -465,7 +465,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities5">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities6">
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="CTPBDModel.Admin">
               <MappingFragment StoreEntitySet="Admin">

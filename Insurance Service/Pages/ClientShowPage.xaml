@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Insurance_Service.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="475" d:DesignWidth="800"
       Title="ClientShowPage"
       Background="White"
       xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
@@ -119,13 +119,10 @@
                   material:HintAssist.Hint="Pasport"
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
+                    <TextBlock Text="back" Margin="10" FontSize="24" FontFamily="Ubuntu Medium" x:Name="BBack" MouseLeftButtonDown="BBack_MouseLeftButtonDown"/>
                 </StackPanel>
-                <Button Background="#388F72" Grid.Column="1" Margin="10,0,0,0" Width="40" Height="450">
-                    <TabItem>
-                        <TabItem.LayoutTransform>
-                            <RotateTransform Angle="-90" />
-                        </TabItem.LayoutTransform>
-                    </TabItem>
+                <Button Background="#388F72" Grid.Column="1" Margin="0,0,-10,0" Height="450" Cursor="Hand">
+                    
                 </Button>
             </Grid>
         </StackPanel>

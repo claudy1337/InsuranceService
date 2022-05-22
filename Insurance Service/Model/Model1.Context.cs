@@ -13,10 +13,10 @@ namespace Insurance_Service.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CTPBDEntities5 : DbContext
+    public partial class CTPBDEntities6 : DbContext
     {
-        public CTPBDEntities5()
-            : base("name=CTPBDEntities5")
+        public CTPBDEntities6()
+            : base("name=CTPBDEntities6")
         {
         }
     
