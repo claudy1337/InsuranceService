@@ -43,7 +43,8 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <ComboBox Width="190" x:Name="usr" Height="35" Margin="60,20,0,0"/>
+                <ComboBox Width="190" x:Name="CBClient" Text="{Binding Path=Passport}"
+                    DisplayMemberPath="Name" Height="35" Margin="60,20,0,0"/>
                 <TextBlock Text="Client Add" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" />
             </StackPanel>
 

@@ -25,7 +25,6 @@ namespace Insurance_Service.Pages
         public ClientAddPage()
         {
             InitializeComponent();
-            Refresh();
         }
 
         private void Bsave_Click(object sender, RoutedEventArgs e)
@@ -38,8 +37,8 @@ namespace Insurance_Service.Pages
             Model.Admin admin = BD_Connection.bd.Admin.FirstOrDefault(a=> a.Login == TBLogin.Text);
             if (admin == null)
             {
-                Model.Client clients = BD_Connection.bd.Client.FirstOrDefault(c => c.Login == TBLogin.Text);
-                if (CurrentUser.Name != null && CurrentUser.Number != null && CurrentUser.FullName != null)
+                Model.Client clients = BD_Connection.bd.Client.FirstOrDefault(c => c.Login == TBLogin.Text &&  c.Passport == TBPassport.Text || c.Passport == TBPassport.Text || c.Number == CurrentUser.Number);
+                if (CurrentUser.Name != null && CurrentUser.Number != null && CurrentUser.FullName != null && clients == null)
                 {
                     clientVerificated.Text = "client load";
                     if (TBPassword.Text == TBPasswordReturn.Text && clients == null)
@@ -59,7 +58,12 @@ namespace Insurance_Service.Pages
                         BD_Connection.bd.Client.Add(client);
                         BD_Connection.bd.SaveChanges();
                         MessageBox.Show("client save");
+                        Refresh();
                     }
+                }
+                else
+                {
+                    MessageBox.Show("error");
                 }
             }
             else
@@ -68,13 +72,27 @@ namespace Insurance_Service.Pages
             
             
         }
-        public void Refresh()
+        public void Verificated()
         {
             clientVerificated.Text = null;
             if (CurrentUser.Name != null && CurrentUser.Number != null && CurrentUser.FullName != null)
                 clientVerificated.Text = "client load";
             else
                 clientVerificated.Text = "client dont load";
+            
+        }
+        public void Refresh()
+        {
+            TBCity.Text = null;
+            TBPassword.Text = null;
+            TBPassport.Text = null;
+            TBPasswordReturn.Text = null;
+            TBLogin.Text = null;
+            TBCity = null;
+            BithDay.Text = null;
+            CurrentUser.Name = null;
+            CurrentUser.Number = null;
+            CurrentUser.FullName = null;
         }
         private void Bclient_Click(object sender, RoutedEventArgs e)
         {
@@ -97,7 +115,7 @@ namespace Insurance_Service.Pages
 
         private void clientVerificated_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Refresh();
+            Verificated();
         }
 
     }

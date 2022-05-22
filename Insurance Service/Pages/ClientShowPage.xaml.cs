@@ -29,7 +29,11 @@ namespace Insurance_Service.Pages
 
         private void BSearchUser_Click(object sender, RoutedEventArgs e)
         {
-
+            ltv.ItemsSource = BD_Connection.bd.Client.ToList().Where(c=>c.Login == TBSearch.Text || c.Number == TBSearch.Text || c.Name == TBSearch.Text);
+            if (TBSearch.Text == "")
+            {
+                Refresh();
+            }
         }
         public void Refresh()
         {
@@ -38,6 +42,15 @@ namespace Insurance_Service.Pages
         }
         private void ltv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+            
+            var selected = ltv.SelectedItem as Model.Client; 
+            TBNameSplit.Text = string.Join(selected.FullName, " ", selected.Name, " ", selected.LastName);
+            TBCity.Text = selected.City;
+            TBLogin.Text = selected.Login;
+            TBNumber.Text = selected.Number;
+            TBBirthDay.Text = selected.BirthDay;
+            TBPasport.Text = selected.Passport;
         }
 
         private void BBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

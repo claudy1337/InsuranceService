@@ -26,6 +26,7 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
             lst.ItemsSource = BD_Connection.bd.Client.ToList();
+            CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
         }
 
         private void EDIT_Click(object sender, RoutedEventArgs e)
