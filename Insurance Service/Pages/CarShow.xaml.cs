@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Insurance_Service.Model;
+using Insurance_Service.CurrentData;
 
 namespace Insurance_Service.Pages
 {
@@ -23,11 +25,28 @@ namespace Insurance_Service.Pages
         public CarShow()
         {
             InitializeComponent();
+            Refresh();
         }
 
         private void BBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            DGCar.ItemsSource = BD_Connection.bd.Car.ToList().Where(c=>c.Client.Login == TBSearch.Text || 
+            c.VIN == TBSearch.Text || c.brand.name == TBSearch.Text || c.Color == TBSearch.Text);
+            if (TBSearch.Text == "")
+            {
+                Refresh();
+            }
+            
+        }
+        public void Refresh()
+        {
+            DGCar.ItemsSource = null;
+            DGCar.ItemsSource = BD_Connection.bd.Car.ToList();
         }
     }
 }

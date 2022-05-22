@@ -34,7 +34,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,30,0,0">
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <ComboBox Width="190" x:Name="usr" Text="{Binding Path=Login}" DisplayMemberPath="Login" Height="35" Margin="60,20,0,0"/>
-                <TextBlock Text="Client Add" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                <TextBlock Text="Law Add" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
             </StackPanel>
             
             <DatePicker
@@ -51,7 +51,7 @@
                 DisplayDateStart="1/01/2020"
                 DisplayDateEnd="1/01/2025"
                 DisplayDate="1/01/2022"
-                material:HintAssist.Hint="Date Issue"
+                material:HintAssist.Hint="Date End"
                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
             <TextBox

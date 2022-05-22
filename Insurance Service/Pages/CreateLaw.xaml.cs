@@ -63,7 +63,7 @@ namespace Insurance_Service.Pages
                     };
                     BD_Connection.bd.Law.Add(lawCreate);
                     BD_Connection.bd.SaveChanges();
-                    MessageBox.Show("client save");
+                    MessageBox.Show("law save");
                     Refresh();
                 }
             }
@@ -75,7 +75,12 @@ namespace Insurance_Service.Pages
         }
         public void Refresh()
         {
-
+            usr.Text = null;
+            TBNumber.Text = null;
+            TBTPAuthority.Text = null;
+            DateEnd.Text = null;
+            DateIssue.Text = null;
+            TBSignature.Text = null;
         }
 
         private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)

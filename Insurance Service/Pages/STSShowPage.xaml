@@ -16,17 +16,24 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Button Background="#388F72" Width="100" x:Name="BBack" Content="Back" HorizontalAlignment="Left" Margin="5" Cursor="Hand"/>
+        <Button Background="#388F72" Width="100" x:Name="BBack" Click="BBack_Click" Content="Back" HorizontalAlignment="Left" Margin="5" Cursor="Hand"/>
         
-        <DataGrid Grid.Row="1" x:Name="DGStst" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"  Margin="0,28,0,0">
+        <DataGrid Grid.Row="1" x:Name="DGSsts" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"  Margin="0,28,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Binding="{Binding idSTS}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding idClient.Name}"/>
-                <DataGridTextColumn Header="Number" Binding="{Binding idCar}"/>
-                <DataGridTextColumn Header="Works" Binding="{Binding STSNumber}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Client.Name}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Client.LastName}"/>
+                <DataGridTextColumn Header="Login" Binding="{Binding Client.login}"/>
+                <DataGridTextColumn Header="Number" Binding="{Binding STSNumber}"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Car.brand}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Car.Model}"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Background="#388F72" Margin="5" Height="50" Grid.Row="2" x:Name="Search"  Content="Search"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button Background="#388F72" Margin="5" Height="50" Grid.Row="2" x:Name="Search" Click="Search_Click"  Content="Search" Cursor="Hand" Width="475"/>
+            <TextBox x:Name="TBSearch" FontFamily="Ubuntu" FontSize="24" Width="245" Margin="50,0,0,0" Height="60" Style="{StaticResource MaterialDesignFilledTextBox}" Cursor="Arrow"/>
+        </StackPanel>
+       
     </Grid>
 </Page>

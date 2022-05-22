@@ -62,7 +62,7 @@ namespace Insurance_Service.Pages
 
         private void STSShow_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new STSShowPage());
         }
     }
 }

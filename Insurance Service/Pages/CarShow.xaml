@@ -12,19 +12,26 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="75"/>
         </Grid.RowDefinitions>
-        <Button Width="100" x:Name="BBack" Content="Back" Click="BBack_Click" HorizontalAlignment="Left" Margin="5" Cursor="Hand"/>
-        <TextBox Text="fdsd" Style="{StaticResource MaterialDesignFilledTextBox}" HorizontalAlignment="Left" FontSize="24" FontFamily="Ubuntu Medium" Margin="545,0,0,350" Grid.RowSpan="2" Width="255"/>
-        <DataGrid Grid.Row="1" x:Name="DGEmployee" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"  Margin="0,28,0,0">
+        <Button Width="100" x:Name="BBack" Content="Back" Click="BBack_Click" HorizontalAlignment="Left" Background="#388F72" Margin="5,5,0,5" Cursor="Hand"/>
+        <DataGrid Grid.Row="1" x:Name="DGCar" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"  Margin="0,28,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="id" Binding="{Binding idEmployee}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding fullNameEmployee}"/>
-                <DataGridTextColumn Header="Number" Binding="{Binding number}"/>
-                <DataGridTextColumn Header="Works" Binding="{Binding worksEmployee}"/>
+                <DataGridTextColumn Header="id" Binding="{Binding idCar}"/>
+                <DataGridTextColumn Header="State Number" Binding="{Binding StateNumber}"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding brand.name}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model.Name}"/>
+                <DataGridTextColumn Header="VIN" Binding="{Binding VIN}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Client.Name}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Client.LastName}"/>
+                <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Margin="5" Height="50" Grid.Row="2" x:Name="Search"  Content="Search"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Background="#388F72" Margin="5" Height="50" Grid.Row="2" x:Name="Search" Click="Search_Click"  Content="Search" Width="390"/>
+            <TextBox x:Name="TBSearch" FontFamily="Ubuntu" FontSize="24" Width="330" Margin="50,0,0,0" Height="60" Style="{StaticResource MaterialDesignFilledTextBox}" Cursor="Arrow"/>
+        </StackPanel>
+
     </Grid>
 </Page>

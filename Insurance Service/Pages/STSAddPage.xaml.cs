@@ -41,7 +41,6 @@ namespace Insurance_Service.Pages
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            CBCar.Text = null;
             var car = CBCar.SelectedItem as Model.Car;
             var client = CBClient.SelectedItem as Model.Client;
             if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
