@@ -1,0 +1,118 @@
+﻿<Page x:Class="Insurance_Service.Pages.Calculator"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Insurance_Service.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Calculator" Background="White"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Grid>
+        <StackPanel>
+            <material:Card
+                material:ShadowAssist.ShadowDepth="Depth5"
+                Height="410" Margin="20">
+                <StackPanel>
+                    <TextBlock Text="Calculator" FontFamily="Ubuntu" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="69*"/>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="76*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ComboBox
+    SelectionChanged="CBrand_SelectionChanged"
+    x:Name="CBrand"
+    Margin="20,20,0,0"
+    HorizontalAlignment="Left"
+    DisplayMemberPath="name"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Brand"
+    Width="300" />
+                            <ComboBox
+    Margin="20,20,0,0"
+    HorizontalAlignment="Left"
+    Text="{Binding Path=Name}"
+    x:Name="CBCar"
+    DisplayMemberPath="Name"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Car"
+    Width="300" />
+                           
+                            <ComboBox
+    Margin="20,20,0,0"
+    HorizontalAlignment="Left"
+    Text="{Binding Path=Name}"
+    x:Name="CBAccident"
+    DisplayMemberPath="Count"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Accident rate procent"
+    Width="300" />
+                            <TextBox
+                  MaxLength="17"
+                  Width="300"
+                  x:Name="TBVin"
+                  Margin="20,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="VIN"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow"/>
+                           
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBox
+                  MaxLength="2"
+                  Width="350"
+                  x:Name="TBExperience"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Experience"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow"/>
+                            <TextBox
+                  MaxLength="4"
+                  Width="350"
+                  x:Name="TBYear"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Year of issue"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow"/>
+                            <TextBox
+                  MaxLength="17"
+                  Width="350"
+                  x:Name="TBPrice"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Price"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow"/>
+
+                            <Button Width="250" Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER PRICE" x:Name="getPrice" Click="getPrice_Click"/>
+                            <TextBlock x:Name="price" HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Ubuntu" FontSize="24"/>
+                            <TextBlock Text="Back" Margin="20,15,0,0" FontFamily="Ubuntu" FontSize="24" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </material:Card>
+        </StackPanel>
+    </Grid>
+</Page>

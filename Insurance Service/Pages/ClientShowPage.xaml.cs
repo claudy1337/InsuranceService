@@ -43,14 +43,21 @@ namespace Insurance_Service.Pages
         private void ltv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            try
+            {
+                var selected = ltv.SelectedItem as Model.Client;
+                TBNameSplit.Text = string.Join(selected.FullName, " ", selected.Name, " ", selected.LastName);
+                TBCity.Text = selected.City;
+                TBLogin.Text = selected.Login;
+                TBNumber.Text = selected.Number;
+                TBBirthDay.Text = selected.BirthDay;
+                TBPasport.Text = selected.Passport;
+            }
+            catch (System.NullReferenceException ex)
+            { 
+                Console.WriteLine(ex.Message); 
+            }
             
-            var selected = ltv.SelectedItem as Model.Client; 
-            TBNameSplit.Text = string.Join(selected.FullName, " ", selected.Name, " ", selected.LastName);
-            TBCity.Text = selected.City;
-            TBLogin.Text = selected.Login;
-            TBNumber.Text = selected.Number;
-            TBBirthDay.Text = selected.BirthDay;
-            TBPasport.Text = selected.Passport;
         }
 
         private void BBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -12,14 +12,19 @@ namespace Insurance_Service.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class contract
+    public partial class DateIs
     {
-        public int idContract { get; set; }
-        public Nullable<int> idCar { get; set; }
-        public Nullable<int> Experience { get; set; }
-        public Nullable<int> ProcentAccidents { get; set; }
-        public Nullable<int> Price { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DateIs()
+        {
+            this.Calculations = new HashSet<Calculations>();
+        }
     
-        public virtual Car Car { get; set; }
+        public int id { get; set; }
+        public Nullable<System.DateTime> DateIssue { get; set; }
+        public Nullable<int> Procent { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calculations> Calculations { get; set; }
     }
 }

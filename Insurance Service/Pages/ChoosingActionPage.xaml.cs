@@ -64,5 +64,20 @@ namespace Insurance_Service.Pages
         {
             NavigationService.Navigate(new STSShowPage());
         }
+
+        private void ContractShow_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ContractShowPage());
+        }
+
+        private void ContractAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ContractAddPage());
+        }
+
+        private void Calculator_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Calculator());
+        }
     }
 }

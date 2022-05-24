@@ -14,6 +14,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+       <Image Source="/Assets/Insure.png" Grid.Column="1" Margin="30"/>
+
 
         <StackPanel Grid.Column="0" Width="300" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="AUTHORIZATION" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Ubuntu"/>

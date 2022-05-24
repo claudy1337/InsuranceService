@@ -12,14 +12,15 @@ namespace Insurance_Service.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class contract
+    public partial class Calculations
     {
-        public int idContract { get; set; }
-        public Nullable<int> idCar { get; set; }
-        public Nullable<int> Experience { get; set; }
-        public Nullable<int> ProcentAccidents { get; set; }
-        public Nullable<int> Price { get; set; }
+        public int id { get; set; }
+        public Nullable<int> idAccident { get; set; }
+        public Nullable<int> idDateis { get; set; }
+        public Nullable<int> idExperience { get; set; }
     
-        public virtual Car Car { get; set; }
+        public virtual Accident Accident { get; set; }
+        public virtual DateIs DateIs { get; set; }
+        public virtual Experience Experience { get; set; }
     }
 }

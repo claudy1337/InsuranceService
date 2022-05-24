@@ -22,6 +22,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class CarAdd : Page
     {
+        Model.CTPBDEntities7 bd = new CTPBDEntities7();
         public CarAdd()
         {
             InitializeComponent();
@@ -87,6 +88,15 @@ namespace Insurance_Service.Pages
                 CBCar.ItemsSource = BD_Connection.bd.Model.Where(x => x.idBrands == brand.id).ToList();
             }
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var brands = BD_Connection.bd.Model.Where(b => b.brand.name == TBModel.Text).ToString();
+            if (brands != null)
+            {
+                CBrand.Text = brands;
+            }
         }
     }
 }

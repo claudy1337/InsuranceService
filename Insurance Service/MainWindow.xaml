@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Insurance_Service"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="MainWindow" Height="475" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         MaxWidth="800" MaxHeight="475" MinHeight="475" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>

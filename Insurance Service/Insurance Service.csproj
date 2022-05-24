@@ -120,10 +120,16 @@
     </ApplicationDefinition>
     <Compile Include="Assets\Assets.cs" />
     <Compile Include="CurrentData\CurrentUser.cs" />
+    <Compile Include="Model\Accident.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Admin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\brand.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Calculations.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Car.cs">
@@ -133,6 +139,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\contract.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DateIs.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Experience.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Law.cs">
@@ -156,11 +168,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Price.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\STS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Calculator.xaml.cs">
+      <DependentUpon>Calculator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CarAdd.xaml.cs">
       <DependentUpon>CarAdd.xaml</DependentUpon>
@@ -189,6 +207,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Calculator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CarAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +232,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ClientShowPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ContractAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ContractShowPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,6 +272,12 @@
     </Compile>
     <Compile Include="Pages\ClientShowPage.xaml.cs">
       <DependentUpon>ClientShowPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ContractAddPage.xaml.cs">
+      <DependentUpon>ContractAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ContractShowPage.xaml.cs">
+      <DependentUpon>ContractShowPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CreateLaw.xaml.cs">
       <DependentUpon>CreateLaw.xaml</DependentUpon>
@@ -297,6 +333,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\CarCard.png" />
+    <Resource Include="Assets\background.jpg" />
+    <Resource Include="Assets\Insure.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

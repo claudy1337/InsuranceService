@@ -36,7 +36,7 @@ namespace Insurance_Service.Pages
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             DGCar.ItemsSource = BD_Connection.bd.Car.ToList().Where(c=>c.Client.Login == TBSearch.Text || 
-            c.VIN == TBSearch.Text || c.brand.name == TBSearch.Text || c.Color == TBSearch.Text);
+            c.VIN == TBSearch.Text || c.brand.name == TBSearch.Text || c.Color == TBSearch.Text || c.Model.Name == TBSearch.Text);
             if (TBSearch.Text == "")
             {
                 Refresh();

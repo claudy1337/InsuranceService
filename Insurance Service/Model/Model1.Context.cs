@@ -34,5 +34,10 @@ namespace Insurance_Service.Model
         public virtual DbSet<Model> Model { get; set; }
         public virtual DbSet<STS> STS { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Accident> Accident { get; set; }
+        public virtual DbSet<DateIs> DateIs { get; set; }
+        public virtual DbSet<Experience> Experience { get; set; }
+        public virtual DbSet<Price> Price { get; set; }
+        public virtual DbSet<Calculations> Calculations { get; set; }
     }
 }

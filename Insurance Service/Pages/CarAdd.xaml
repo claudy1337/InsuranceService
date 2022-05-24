@@ -10,19 +10,38 @@
       xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="485"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="/Assets/CarCard.png" Grid.Column="1"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="422" Width="305">
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                  VerticalAlignment="Center"  
+                  Width="150"
+                  HorizontalAlignment="Left"
+                  x:Name="TBModel"
+                  MaxLength="16"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Model or Brand"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow"/>
+                <Button Width="140"
+                        Background="#388F72"
+                        Height="45" VerticalAlignment="Center" Margin="10,0,0,0" Content="Search" Click="Button_Click"/>
+            </StackPanel>
+
+
+            <Image Source="/Assets/CarCard.png" Margin="0,20,0,0" Grid.Column="1"/>
             <Button Width="260" Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER" x:Name="save" Click="save_Click"/>
             <TextBlock Text="Back" FontSize="24" HorizontalAlignment="Center" Margin="-200,10,0,0" FontFamily="Ubuntu" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
-        
 
-        <StackPanel Grid.Column="0" Width="500" Margin="0,-10,0,0">
+
+        <StackPanel Grid.Column="0" Margin="0,-10,300,0" Grid.ColumnSpan="2">
             <TextBlock Text="Car Add" FontSize="24" FontFamily="Ubuntu" Margin="20"/>
             <TextBox
                   Width="350"
@@ -37,7 +56,7 @@
                   FontSize="15" Cursor="Arrow"/>
             <ComboBox
     SelectionChanged="CBrand_SelectionChanged"
-    Text="{Binding Path=name}"
+    Text=""
     x:Name="CBrand"
     Margin="0,20,0,0"
     DisplayMemberPath="name"
@@ -86,7 +105,7 @@
                   FontFamily="Ubuntu Light"
                   FontSize="15" Cursor="Arrow"
                   Width="350"/>
-           
+
         </StackPanel>
     </Grid>
 </Page>

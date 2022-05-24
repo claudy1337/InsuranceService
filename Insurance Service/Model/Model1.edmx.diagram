@@ -22,6 +22,14 @@
         <AssociationConnector Association="CTPBDModel.FK_Law_Client" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_STS_Client" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Car_Model" />
+        <EntityTypeShape EntityType="CTPBDModel.Accident" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="CTPBDModel.DateIs" Width="1.5" PointX="9.375" PointY="7.75" />
+        <EntityTypeShape EntityType="CTPBDModel.Experience" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CTPBDModel.Price" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CTPBDModel.Calculations" Width="1.5" PointX="12.625" PointY="4" />
+        <AssociationConnector Association="CTPBDModel.FK_Calculations_Accident" />
+        <AssociationConnector Association="CTPBDModel.FK_Calculations_DateIs" />
+        <AssociationConnector Association="CTPBDModel.FK_Calculations_Experience" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
