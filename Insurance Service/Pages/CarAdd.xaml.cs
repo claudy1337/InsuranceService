@@ -28,9 +28,16 @@ namespace Insurance_Service.Pages
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
             CBrand.ItemsSource = BD_Connection.bd.brand.ToList();
-            
-        }
+            TBColor.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBModel.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBVin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
 
+        }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
         private void save_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TBVin.Text) && string.IsNullOrWhiteSpace(TBColor.Text) && string.IsNullOrWhiteSpace(TBNumber.Text) && string.IsNullOrWhiteSpace(CBCar.Text) && string.IsNullOrWhiteSpace(CBClient.Text))

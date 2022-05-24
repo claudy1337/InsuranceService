@@ -41,7 +41,10 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
             CBrand.ItemsSource = BD_Connection.bd.brand.ToList();
-            CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();            
+            CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();
+            TBVin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBExperience.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBYear.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
 
         private void CBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -57,6 +60,10 @@ namespace Insurance_Service.Pages
         {
             Refresh();
           
+        }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
         public void Refresh()
         {

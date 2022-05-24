@@ -83,7 +83,7 @@
                 <CheckBox x:Name="CheckD" Content="D" Margin="0,0,10,0"/>
                 <CheckBox x:Name="CheckC1E" Content="C1E" Margin="0,0,10,0"/>
             </StackPanel>
-            <Button Background="#388F72" Height="35" Margin="60,0,60,0" Content="SAVE" x:Name="save" Click="save_Click"/>
+            <Button Background="#388F72" Height="35" Margin="60,0,60,0" Content="SAVE" x:Name="save" Click="save_Click" Cursor="Hand"/>
         </StackPanel>
     </Grid>
 </Page>

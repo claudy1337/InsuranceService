@@ -22,7 +22,7 @@
                   Width="150"
                   HorizontalAlignment="Left"
                   x:Name="TBModel"
-                  MaxLength="16"
+                  MaxLength="25"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   TextWrapping="Wrap"
                   material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"

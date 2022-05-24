@@ -22,6 +22,7 @@
             <TextBox
                   x:Name="TBLogin"
                   Margin="0,20,0,0"
+                  MaxLength="50"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
                   TextWrapping="Wrap"
@@ -31,6 +32,7 @@
                   FontSize="15" Cursor="Arrow"/>
             <TextBox
                   x:Name="TBPassword"
+                  MaxLength="50"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
                   TextWrapping="Wrap"

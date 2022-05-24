@@ -25,8 +25,16 @@ namespace Insurance_Service.Pages
         public ClientAddPage()
         {
             InitializeComponent();
+            TBLogin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBPassword.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBPasswordReturn.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBPassport.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBCity.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
 
+        }
         private void Bsave_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TBLogin.Text) && string.IsNullOrEmpty(TBPassport.Text) && string.IsNullOrEmpty(TBPassport.Text) && string.IsNullOrEmpty(BithDay.Text) && string.IsNullOrEmpty(TBCity.Text))

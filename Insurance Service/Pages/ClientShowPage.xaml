@@ -12,11 +12,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="550"/>
+            <ColumnDefinition Width="285"/>
+            <ColumnDefinition Width="515"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Width="282">
                 <TextBox Grid.Column="0"
                   x:Name="TBSearch"
                   Margin="10,10,0,10"
@@ -30,6 +30,7 @@
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
                 <Button Background="#388F72" Height="46" Margin="10,0,0,0" Content="ENTER" x:Name="BSearchUser" Click="BSearchUser_Click"  Width="105"/>
+                <CheckBox Margin="10,0,0,0" x:Name="CBclear"/>
             </StackPanel>
             <ListView x:Name="ltv" Width="220" Height="400" SelectionChanged="ltv_SelectionChanged">
                 <ListView.ItemTemplate>
@@ -51,12 +52,16 @@
             </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <Grid Height="450">
+            <Grid Height="455">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="83*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="320">
+                <StackPanel VerticalAlignment="Top" Orientation="Vertical" HorizontalAlignment="Center" Width="320" Grid.RowSpan="2">
                     <TextBox
                   x:Name="TBLogin"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -111,7 +116,6 @@
                   FontSize="15"/>
                     <TextBox
                   x:Name="TBPasport"
-                  IsEnabled="False"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
                   TextWrapping="Wrap"
@@ -120,11 +124,13 @@
                   material:HintAssist.Hint="Pasport"
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
-                    <TextBlock Text="back" Margin="10" FontSize="24" FontFamily="Ubuntu Medium" x:Name="BBack" MouseLeftButtonDown="BBack_MouseLeftButtonDown"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="back" Margin="10" FontSize="24" FontFamily="Ubuntu Medium" x:Name="BBack" MouseLeftButtonDown="BBack_MouseLeftButtonDown"/>
+                        <Button Background="#388F72" Height="40" Margin="140,0,0,0" Content="EDIT" x:Name="BEdit" HorizontalAlignment="Right" Click="BEdit_Click"  Width="105" Cursor="Hand"/>
+                    </StackPanel>
                 </StackPanel>
-                <Button Background="#388F72" Grid.Column="1" Margin="0,0,-10,0" Height="450" Cursor="Hand">
-                    
-                </Button>
+
             </Grid>
         </StackPanel>
     </Grid>

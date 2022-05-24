@@ -26,6 +26,8 @@ namespace Insurance_Service.Pages
         public Auth()
         {
             InitializeComponent();
+            TBPassword.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBLogin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
         private void auth_Click(object sender, RoutedEventArgs e)
         {
@@ -45,6 +47,10 @@ namespace Insurance_Service.Pages
             {
                 MessageBox.Show("error");
             }
+        }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -27,8 +27,12 @@ namespace Insurance_Service.Pages
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
             CBCar.ItemsSource = BD_Connection.bd.Car.ToList();
+            TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
 
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ClientAddPage());

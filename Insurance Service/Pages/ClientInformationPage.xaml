@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Insurance_Service.Pages"
       mc:Ignorable="d" 
-      Title="ClientInformation" Height="340" Width="300"
+      Title="ClientInformation" Height="360" Width="300"
       xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
       Background="White">
 
@@ -21,7 +21,7 @@
                   material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                   material:HintAssist.Hint="Name"
                   FontFamily="Ubuntu Light"
-                  FontSize="15"/>
+                  FontSize="15" Cursor="Arrow"/>
             <TextBox
                   x:Name="TBLastName"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -54,7 +54,8 @@
                   material:HintAssist.Hint="Number"
                   FontFamily="Ubuntu Light"
                   FontSize="15" Cursor="Arrow" PreviewTextInput="TBNumber_PreviewTextInput"/>
-            <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER" x:Name="enter" Click="enter_Click"/>
+            <Button Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER" x:Name="enter" Click="enter_Click" Cursor="Hand"/>
+            <TextBlock Text="Back" HorizontalAlignment="Left" FontFamily="Ubuntu" FontSize="15" Margin="0,5,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -24,21 +24,34 @@ namespace Insurance_Service.Pages
         public ClientShowPage()
         {
             InitializeComponent();
-            Refresh(); 
+            if (CBclear.IsChecked == true)
+            {
+                TBSearch.Text = null;
+            }
+            returnConnect(); 
         }
 
         private void BSearchUser_Click(object sender, RoutedEventArgs e)
         {
             ltv.ItemsSource = BD_Connection.bd.Client.ToList().Where(c=>c.Login == TBSearch.Text || c.Number == TBSearch.Text || c.Name == TBSearch.Text);
-            if (TBSearch.Text == "")
+            if (TBSearch.Text == "" || TBSearch.Text == null || CBclear.IsChecked == true)
             {
-                Refresh();
+                returnConnect();
             }
         }
-        public void Refresh()
+        public void returnConnect()
         {
             ltv.ItemsSource = null;
             ltv.ItemsSource = BD_Connection.bd.Client.ToList();
+        }
+        public void Refresh()
+        {
+            TBLogin.Text = null;
+            TBNameSplit.Text = null;
+            TBNumber.Text = null;
+            TBBirthDay.Text = null;
+            TBCity.Text = null;
+            TBPasport.Text = null;
         }
         private void ltv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -63,6 +76,25 @@ namespace Insurance_Service.Pages
         private void BBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void BEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var client = ltv.SelectedItem as Model.Client;
+            if (client != null)
+            {
+                var selectedClient = BD_Connection.bd.Client.Where(c => c.Login == client.Login && c.Login == TBLogin.Text).FirstOrDefault();
+                selectedClient.Number = TBNumber.Text;
+                selectedClient.City = TBCity.Text;
+                selectedClient.Passport = TBPasport.Text;
+                BD_Connection.bd.SaveChanges();
+                MessageBox.Show("client edit");
+                Refresh();
+                returnConnect();
+            }
+            else
+                MessageBox.Show("incorrect");
+            
         }
     }
 }

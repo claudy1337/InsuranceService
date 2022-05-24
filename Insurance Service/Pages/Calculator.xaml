@@ -95,6 +95,7 @@
                   FontSize="15" Cursor="Arrow"/>
                             <TextBox
                   MaxLength="17"
+                  IsEnabled="False"
                   Width="350"
                   x:Name="TBPrice"
                   Margin="0,20,0,0"
