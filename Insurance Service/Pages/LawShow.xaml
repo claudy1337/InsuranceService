@@ -16,6 +16,7 @@
             <ColumnDefinition Width="500"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical">
+            <TextBlock x:Name="countLaw" FontSize="20" FontFamily="Ubuntu"/>
             <ListView Width="110" Height="445" x:Name="lst" SelectionChanged="lst_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>

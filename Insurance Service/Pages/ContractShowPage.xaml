@@ -15,10 +15,11 @@
             <ColumnDefinition Width="560"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
-
+            <TextBlock x:Name="countContract" FontSize="20" Margin="0,10,0,0"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="235">
+                
                 <TextBox
-                  x:Name="TBLogin"
+                  x:Name="TBLogins"
                   Margin="10,20,0,0"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
@@ -27,31 +28,37 @@
                   material:HintAssist.Hint="Login"
                   FontFamily="Ubuntu Light"
                   FontSize="15" Cursor="Arrow" Width="115"/>
-                <Button Background="#388F72" Height="45" Margin="10,20,0,0" Content="ENTER" x:Name="auth" Width="95"/>
+                <Button Background="#388F72" Height="45" Click="auth_Click" Margin="10,20,0,0" Content="ENTER" x:Name="auth" Width="95"/>
 
             </StackPanel>
-            <ListView Grid.Column="0" Margin="0,20,0,0" Width="240" Height="350">
+            <ListView SelectionChanged="contractList_SelectionChanged" Grid.Column="0" Margin="0,20,0,0" Width="240" Height="286" x:Name="contractList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        
-                    
-                <material:Card
+
+
+                        <material:Card
                         HorizontalAlignment="Center"
                         UniformCornerRadius="12"
                         material:ShadowAssist.ShadowDepth="Depth5"
                         Padding="32" Width="210">
-                    <TextBlock Text="{Binding Client.Login}" VerticalAlignment="Center"
-                               HorizontalAlignment="Center" FontFamily="Ubuntu" FontSize="24"/>
-                </material:Card>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Car.Client.Login}" 
+                                FontFamily="Ubuntu" FontSize="24"/>
+                                <TextBlock Text="{Binding Car.StateNumber}" 
+                                FontFamily="Ubuntu" FontSize="24"/>
+                            </StackPanel>
+                            
+                        </material:Card>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <TextBlock Text="Back" FontSize="24" Margin="10,0,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="250"/>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="280"/>
+                    <RowDefinition Height="170"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <Grid>
@@ -59,17 +66,86 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+                            <TextBlock Text="Client" FontSize="24" FontFamily="Ubuntu" Margin="10"/>
+                            <TextBox
+                  x:Name="TBLogin"
+                  Margin="10,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Login"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
+                            <TextBox
+                  x:Name="TBName"
+                  Margin="10,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Name"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
+                            <TextBox
+                  x:Name="TBNumber"
+                  Margin="10,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Number"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="1">
-                            
+                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                            <TextBlock Text="Car" FontSize="24" FontFamily="Ubuntu" Margin="10"/>
+                            <TextBox
+                  x:Name="TBStateNumber"
+                  Margin="10,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="State Number"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
+                            <TextBox
+                  x:Name="TBModel"
+                  Margin="10,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Model"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
+                            <TextBox
+                  x:Name="TBVIN"
+                  Margin="10,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="VIN"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
-                <StackPanel Grid.Row="1">
-                    
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                  
+                    <TextBox
+                  IsEnabled="False"
+                  x:Name="TBPrice"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Price"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" Width="200"/>
+                    <Button Background="#388F72" Height="45" Margin="70,20,0,0" Content="EDIT" x:Name="autsh" Width="200"/>
                 </StackPanel>
+               
             </Grid>
         </StackPanel>
     </Grid>

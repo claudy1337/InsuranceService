@@ -31,8 +31,6 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
             TBExperience.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand)); 
-           
-            
             Refresh();
         }
         public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
@@ -49,24 +47,56 @@ namespace Insurance_Service.Pages
 
         private void getPrice_Click(object sender, RoutedEventArgs e)
         {
+            Maths();
             var accident = CBAccident.SelectedItem as Model.Accident;
             var cars = CBCar.SelectedItem as Model.Car;
+            Model.contract contracts = BD_Connection.bd.contract.FirstOrDefault(c => c.idCar == cars.idCar);
             if (string.IsNullOrEmpty(TBExperience.Text) && string.IsNullOrEmpty(CBAccident.Text) && string.IsNullOrEmpty(CBCar.Text))
             {
                 MessageBox.Show("incorrect");
             }
+            else if (contracts != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Данная машина уже заведена в учет изменить данные?", "Запись найдена", MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Model.contract contract;
+                        var car = CBCar.SelectedItem as Model.Car;
+                        if (car != null)
+                        {
+                            contracts.idCar = car.idCar;
+                            contracts.Experience = Convert.ToInt32(TBExperience.Text);
+                            contracts.ProcentAccidents = accident.id;
+                            contracts.Price = Assets.Assets.valuePrice;
+                            BD_Connection.bd.SaveChanges();
+                            MessageBox.Show($"contract edit, price: {Assets.Assets.valuePrice}");
+                            Refresh();
+                        }
+                        else
+                            MessageBox.Show("incorrect");
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                }
+               
+
+            }
             else
             {
+                Maths();
                 Model.contract contract = new contract()
                 {
                     idCar = cars.idCar,
                     Experience = Convert.ToInt32(TBExperience.Text),
-                    ProcentAccidents = Convert.ToInt32(accident),
+                    ProcentAccidents = accident.id,
                     Price = Assets.Assets.valuePrice
                 };
                 BD_Connection.bd.contract.Add(contract);
                 BD_Connection.bd.SaveChanges();
-                MessageBox.Show("law save");
+                MessageBox.Show("contract save");
                 Refresh();
             }
         }
@@ -76,13 +106,15 @@ namespace Insurance_Service.Pages
             TBExperience.Text = null;
             CBAccident.Text = null;
             TBPrice.Text = null;
-            CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();
             CBCar.ItemsSource = BD_Connection.bd.Car.ToList();
-            CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();
+            CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();            
             
-
         }
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Maths();
+        }
+        public void Maths()
         {
             try
             {
@@ -142,11 +174,26 @@ namespace Insurance_Service.Pages
                 }
                 TBPrice.Text = $"{Assets.Assets.valuePrice}";
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 MessageBox.Show("incorrect");
                 Refresh();
             }
+        }
+
+        private void CBCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
+
+        private void CBAccident_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

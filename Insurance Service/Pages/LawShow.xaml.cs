@@ -26,6 +26,7 @@ namespace Insurance_Service.Pages
         public LawShow()
         {
             InitializeComponent();
+            countLaw.Text = $"{BD_Connection.bd.Law.Count().ToString()} law";
             lst.ItemsSource = BD_Connection.bd.Law.ToList();
             TBIdClient.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
