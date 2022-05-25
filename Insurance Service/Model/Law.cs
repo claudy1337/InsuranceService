@@ -18,11 +18,12 @@ namespace Insurance_Service.Model
         public int idClient { get; set; }
         public System.DateTime DateIssue { get; set; }
         public string Number { get; set; }
-        public System.DateTime DateEnd { get; set; }
+        public Nullable<System.DateTime> DateEnd { get; set; }
         public string Region { get; set; }
         public string TPAuthority { get; set; }
         public string Category { get; set; }
         public string image { get; set; }
+        public byte[] images { get; set; }
     
         public virtual Client Client { get; set; }
     }

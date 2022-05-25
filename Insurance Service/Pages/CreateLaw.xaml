@@ -45,14 +45,7 @@
                 DisplayDate="1/05/2022"
                 material:HintAssist.Hint="Date Issue"
                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
-            <DatePicker
-                Margin="60,20,60,0"
-                x:Name="DateEnd"
-                DisplayDateStart="1/01/2020"
-                DisplayDateEnd="1/01/2025"
-                DisplayDate="1/01/2022"
-                material:HintAssist.Hint="Date End"
-                Style="{StaticResource MaterialDesignFilledDatePicker}" />
+            
 
             <TextBox
                   x:Name="TBTPAuthority"
@@ -76,14 +69,8 @@
                   material:HintAssist.Hint="Number"
                   FontFamily="Ubuntu Light"
                   FontSize="15" PreviewTextInput="TBNumbers" Cursor="Arrow"/>
-            <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Center">
-                <CheckBox x:Name="CheckA" Content="A" Margin="0,0,10,0"/>
-                <CheckBox x:Name="CheckB"  Content="B" Margin="0,0,10,0"/>
-                <CheckBox x:Name="CheckC" Content="C" Margin="0,0,10,0"/>
-                <CheckBox x:Name="CheckD" Content="D" Margin="0,0,10,0"/>
-                <CheckBox x:Name="CheckC1E" Content="C1E" Margin="0,0,10,0"/>
-            </StackPanel>
-            <Button Background="#388F72" Height="35" Margin="60,0,60,0" Content="SAVE" x:Name="save" Click="save_Click" Cursor="Hand"/>
+           
+            <Button Background="#388F72" Height="35" Margin="60,30,60,0" Content="SAVE" x:Name="save" Click="save_Click" Cursor="Hand"/>
         </StackPanel>
     </Grid>
 </Page>

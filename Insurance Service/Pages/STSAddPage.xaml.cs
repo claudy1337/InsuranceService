@@ -51,7 +51,7 @@ namespace Insurance_Service.Pages
                 var client = CBClient.SelectedItem as Model.Client;
                 if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
                 {
-                    Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text);
+                    Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text || s.idClient == client.idClient);
                     if (sts == null)
                     {
                         Model.STS stsCreate = new Model.STS()
@@ -64,6 +64,10 @@ namespace Insurance_Service.Pages
                         BD_Connection.bd.SaveChanges();
                         MessageBox.Show("sts save");
                         Refresh();
+                    }
+                    else
+                    {
+                        
                     }
 
                 }
@@ -92,20 +96,6 @@ namespace Insurance_Service.Pages
 
         private void CBCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            var client =CBClient.SelectedItem as Client;
-            if (client != null)
-            {
-                CBCar.ItemsSource = BD_Connection.bd.Car.Where(x => x.IdClient == client.idClient).ToList();
-            }
-            else
-            {
-                CBCar.Text = null;
-            }
-
-
-               
-            
         }
     }
 }

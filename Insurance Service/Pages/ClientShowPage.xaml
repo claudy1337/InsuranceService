@@ -85,6 +85,7 @@
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
                     <TextBox
+                  MaxLength="11"
                   x:Name="TBNumber"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
@@ -93,7 +94,7 @@
                   material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                   material:HintAssist.Hint="Number"
                   FontFamily="Ubuntu Light"
-                  FontSize="15"/>
+                  FontSize="15" PreviewTextInput="number"/>
                     <TextBox
                   IsEnabled="False"
                   x:Name="TBBirthDay"
@@ -107,6 +108,7 @@
                   FontSize="15"/>
                     <TextBox
                   x:Name="TBCity"
+                  MaxLength="50"   
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
                   TextWrapping="Wrap"
@@ -125,7 +127,7 @@
                   material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                   material:HintAssist.Hint="Pasport"
                   FontFamily="Ubuntu Light"
-                  FontSize="15"/>
+                  FontSize="15" PreviewTextInput="passport"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Text="back" Margin="10" FontSize="24" FontFamily="Ubuntu Medium" x:Name="BBack" MouseLeftButtonDown="BBack_MouseLeftButtonDown"/>

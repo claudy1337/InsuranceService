@@ -17,21 +17,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="422" Width="305">
             <StackPanel Orientation="Horizontal">
-                <TextBox
-                  VerticalAlignment="Center"  
-                  Width="150"
-                  HorizontalAlignment="Left"
-                  x:Name="TBModel"
-                  MaxLength="25"
-                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                  TextWrapping="Wrap"
-                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  material:HintAssist.Hint="Model or Brand"
-                  FontFamily="Ubuntu Light"
-                  FontSize="15" Cursor="Arrow"/>
-                <Button Width="140"
-                        Background="#388F72"
-                        Height="45" VerticalAlignment="Center" Margin="10,0,0,0" Content="Search" Click="Button_Click"/>
+                
             </StackPanel>
 
 

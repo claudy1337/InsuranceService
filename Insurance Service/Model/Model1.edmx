@@ -46,7 +46,7 @@
           <Property Name="StateNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="idBrand" Type="int" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
-          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" />
           <Property Name="Color" Type="nvarchar" MaxLength="50" />
           <Property Name="idModel" Type="int" />
         </EntityType>
@@ -99,11 +99,12 @@
           <Property Name="idClient" Type="int" Nullable="false" />
           <Property Name="DateIssue" Type="date" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateEnd" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" />
           <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TPAuthority" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="image" Type="nvarchar" MaxLength="50" />
+          <Property Name="images" Type="image" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -189,7 +190,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Car_Client1">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -336,6 +337,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CTPBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accident">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Procent" Type="Int32" />
+          <NavigationProperty Name="Calculations" Relationship="Self.FK_Calculations_Accident" FromRole="Accident" ToRole="Calculations" />
+        </EntityType>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="id" />
@@ -354,6 +364,18 @@
           <NavigationProperty Name="Car" Relationship="Self.FK_Car_brand" FromRole="brand" ToRole="Car" />
           <NavigationProperty Name="Model" Relationship="Self.FK_Model_brand" FromRole="brand" ToRole="Model" />
         </EntityType>
+        <EntityType Name="Calculations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idAccident" Type="Int32" />
+          <Property Name="idDateis" Type="Int32" />
+          <Property Name="idExperience" Type="Int32" />
+          <NavigationProperty Name="Accident" Relationship="Self.FK_Calculations_Accident" FromRole="Calculations" ToRole="Accident" />
+          <NavigationProperty Name="DateIs" Relationship="Self.FK_Calculations_DateIs" FromRole="Calculations" ToRole="DateIs" />
+          <NavigationProperty Name="Experience" Relationship="Self.FK_Calculations_Experience" FromRole="Calculations" ToRole="Experience" />
+        </EntityType>
         <EntityType Name="Car">
           <Key>
             <PropertyRef Name="idCar" />
@@ -362,14 +384,14 @@
           <Property Name="StateNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idBrand" Type="Int32" />
           <Property Name="VIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idModel" Type="Int32" />
           <NavigationProperty Name="brand" Relationship="Self.FK_Car_brand" FromRole="Car" ToRole="brand" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Car_Client" FromRole="Car" ToRole="Client" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Car_Client1" FromRole="Car" ToRole="Client" />
+          <NavigationProperty Name="Model" Relationship="Self.FK_Car_Model" FromRole="Car" ToRole="Model" />
           <NavigationProperty Name="contract" Relationship="Self.FK_contract_Car" FromRole="Car" ToRole="contract" />
           <NavigationProperty Name="STS" Relationship="Self.FK_STS_Car" FromRole="Car" ToRole="STS" />
-          <Property Name="idModel" Type="Int32" />
-          <NavigationProperty Name="Model" Relationship="CTPBDModel.FK_Car_Model" FromRole="Car" ToRole="Model" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -385,7 +407,7 @@
           <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Client" FromRole="Client" ToRole="Car" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Client1" FromRole="Client" ToRole="Car" />
           <NavigationProperty Name="Law" Relationship="Self.FK_Law_Client" FromRole="Client" ToRole="Law" />
           <NavigationProperty Name="STS" Relationship="Self.FK_STS_Client" FromRole="Client" ToRole="STS" />
         </EntityType>
@@ -400,6 +422,24 @@
           <Property Name="Price" Type="Int32" />
           <NavigationProperty Name="Car" Relationship="Self.FK_contract_Car" FromRole="contract" ToRole="Car" />
         </EntityType>
+        <EntityType Name="DateIs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateIssue" Type="DateTime" Precision="0" />
+          <Property Name="Procent" Type="Int32" />
+          <NavigationProperty Name="Calculations" Relationship="Self.FK_Calculations_DateIs" FromRole="DateIs" ToRole="Calculations" />
+        </EntityType>
+        <EntityType Name="Experience">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Procent" Type="Int32" />
+          <NavigationProperty Name="Calculations" Relationship="Self.FK_Calculations_Experience" FromRole="Experience" ToRole="Calculations" />
+        </EntityType>
         <EntityType Name="Law">
           <Key>
             <PropertyRef Name="idLaw" />
@@ -408,12 +448,13 @@
           <Property Name="idClient" Type="Int32" Nullable="false" />
           <Property Name="DateIssue" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
           <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TPAuthority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
+          <Property Name="images" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -423,7 +464,15 @@
           <Property Name="idBrands" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="brand" Relationship="Self.FK_Model_brand" FromRole="Model" ToRole="brand" />
-          <NavigationProperty Name="Car" Relationship="CTPBDModel.FK_Car_Model" FromRole="Model" ToRole="Car" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Model" FromRole="Model" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price1" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="STS">
           <Key>
@@ -446,6 +495,18 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_Calculations_Accident">
+          <End Role="Accident" Type="Self.Accident" Multiplicity="0..1" />
+          <End Role="Calculations" Type="Self.Calculations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accident">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Calculations">
+              <PropertyRef Name="idAccident" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Car_brand">
           <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
@@ -470,8 +531,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Car_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+        <Association Name="FK_Calculations_DateIs">
+          <End Role="DateIs" Type="Self.DateIs" Multiplicity="0..1" />
+          <End Role="Calculations" Type="Self.Calculations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DateIs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Calculations">
+              <PropertyRef Name="idDateis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calculations_Experience">
+          <End Role="Experience" Type="Self.Experience" Multiplicity="0..1" />
+          <End Role="Calculations" Type="Self.Calculations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Experience">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Calculations">
+              <PropertyRef Name="idExperience" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_Client1">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
@@ -479,6 +564,18 @@
             </Principal>
             <Dependent Role="Car">
               <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_Model">
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="idModel" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -530,16 +627,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CTPBDEntities7" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CTPBDEntities8" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accident" EntityType="Self.Accident" />
           <EntitySet Name="Admin" EntityType="Self.Admin" />
           <EntitySet Name="brand" EntityType="Self.brand" />
+          <EntitySet Name="Calculations" EntityType="Self.Calculations" />
           <EntitySet Name="Car" EntityType="Self.Car" />
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="contract" EntityType="Self.contract" />
+          <EntitySet Name="DateIs" EntityType="Self.DateIs" />
+          <EntitySet Name="Experience" EntityType="Self.Experience" />
           <EntitySet Name="Law" EntityType="Self.Law" />
           <EntitySet Name="Model" EntityType="Self.Model" />
+          <EntitySet Name="Price" EntityType="Self.Price" />
           <EntitySet Name="STS" EntityType="Self.STS" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Calculations_Accident" Association="Self.FK_Calculations_Accident">
+            <End Role="Accident" EntitySet="Accident" />
+            <End Role="Calculations" EntitySet="Calculations" />
+          </AssociationSet>
           <AssociationSet Name="FK_Car_brand" Association="Self.FK_Car_brand">
             <End Role="brand" EntitySet="brand" />
             <End Role="Car" EntitySet="Car" />
@@ -548,8 +654,20 @@
             <End Role="brand" EntitySet="brand" />
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
-          <AssociationSet Name="FK_Car_Client" Association="Self.FK_Car_Client">
+          <AssociationSet Name="FK_Calculations_DateIs" Association="Self.FK_Calculations_DateIs">
+            <End Role="DateIs" EntitySet="DateIs" />
+            <End Role="Calculations" EntitySet="Calculations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calculations_Experience" Association="Self.FK_Calculations_Experience">
+            <End Role="Experience" EntitySet="Experience" />
+            <End Role="Calculations" EntitySet="Calculations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_Client1" Association="Self.FK_Car_Client1">
             <End Role="Client" EntitySet="Client" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_Model" Association="Self.FK_Car_Model">
+            <End Role="Model" EntitySet="Model" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
           <AssociationSet Name="FK_contract_Car" Association="Self.FK_contract_Car">
@@ -568,129 +686,22 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="STS" EntitySet="STS" />
           </AssociationSet>
-          <AssociationSet Name="FK_Car_Model" Association="CTPBDModel.FK_Car_Model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="Car" EntitySet="Car" />
-          </AssociationSet>
-          <EntitySet Name="Accident" EntityType="CTPBDModel.Accident" />
-          <EntitySet Name="DateIs" EntityType="CTPBDModel.DateIs" />
-          <EntitySet Name="Experience" EntityType="CTPBDModel.Experience" />
-          <EntitySet Name="Price" EntityType="CTPBDModel.Price" />
-          <EntitySet Name="Calculations" EntityType="CTPBDModel.Calculations" />
-          <AssociationSet Name="FK_Calculations_Accident" Association="CTPBDModel.FK_Calculations_Accident">
-            <End Role="Accident" EntitySet="Accident" />
-            <End Role="Calculations" EntitySet="Calculations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Calculations_DateIs" Association="CTPBDModel.FK_Calculations_DateIs">
-            <End Role="DateIs" EntitySet="DateIs" />
-            <End Role="Calculations" EntitySet="Calculations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Calculations_Experience" Association="CTPBDModel.FK_Calculations_Experience">
-            <End Role="Experience" EntitySet="Experience" />
-            <End Role="Calculations" EntitySet="Calculations" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Car_Model">
-          <End Type="CTPBDModel.Model" Role="Model" Multiplicity="0..1" />
-          <End Type="CTPBDModel.Car" Role="Car" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Car">
-              <PropertyRef Name="idModel" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Accident">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Procent" Type="Int32" />
-          <NavigationProperty Name="Calculations" Relationship="CTPBDModel.FK_Calculations_Accident" FromRole="Accident" ToRole="Calculations" />
-        </EntityType>
-        <EntityType Name="DateIs">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateIssue" Type="DateTime" Precision="0" />
-          <Property Name="Procent" Type="Int32" />
-          <NavigationProperty Name="Calculations" Relationship="CTPBDModel.FK_Calculations_DateIs" FromRole="DateIs" ToRole="Calculations" />
-        </EntityType>
-        <EntityType Name="Experience">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="Procent" Type="Int32" />
-          <NavigationProperty Name="Calculations" Relationship="CTPBDModel.FK_Calculations_Experience" FromRole="Experience" ToRole="Calculations" />
-        </EntityType>
-        <EntityType Name="Price">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price1" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="Calculations">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="idAccident" Type="Int32" />
-          <Property Name="idDateis" Type="Int32" />
-          <Property Name="idExperience" Type="Int32" />
-          <NavigationProperty Name="Accident" Relationship="CTPBDModel.FK_Calculations_Accident" FromRole="Calculations" ToRole="Accident" />
-          <NavigationProperty Name="DateIs" Relationship="CTPBDModel.FK_Calculations_DateIs" FromRole="Calculations" ToRole="DateIs" />
-          <NavigationProperty Name="Experience" Relationship="CTPBDModel.FK_Calculations_Experience" FromRole="Calculations" ToRole="Experience" />
-        </EntityType>
-        <Association Name="FK_Calculations_Accident">
-          <End Type="CTPBDModel.Accident" Role="Accident" Multiplicity="0..1" />
-          <End Type="CTPBDModel.Calculations" Role="Calculations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accident">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Calculations">
-              <PropertyRef Name="idAccident" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Calculations_DateIs">
-          <End Type="CTPBDModel.DateIs" Role="DateIs" Multiplicity="0..1" />
-          <End Type="CTPBDModel.Calculations" Role="Calculations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DateIs">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Calculations">
-              <PropertyRef Name="idDateis" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Calculations_Experience">
-          <End Type="CTPBDModel.Experience" Role="Experience" Multiplicity="0..1" />
-          <End Type="CTPBDModel.Calculations" Role="Calculations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Experience">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Calculations">
-              <PropertyRef Name="idExperience" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities7">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities8">
+          <EntitySetMapping Name="Accident">
+            <EntityTypeMapping TypeName="CTPBDModel.Accident">
+              <MappingFragment StoreEntitySet="Accident">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Procent" ColumnName="Procent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="CTPBDModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -709,16 +720,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Calculations">
+            <EntityTypeMapping TypeName="CTPBDModel.Calculations">
+              <MappingFragment StoreEntitySet="Calculations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idAccident" ColumnName="idAccident" />
+                <ScalarProperty Name="idDateis" ColumnName="idDateis" />
+                <ScalarProperty Name="idExperience" ColumnName="idExperience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Car">
             <EntityTypeMapping TypeName="CTPBDModel.Car">
               <MappingFragment StoreEntitySet="Car">
-                <ScalarProperty Name="idModel" ColumnName="idModel" />
                 <ScalarProperty Name="idCar" ColumnName="idCar" />
                 <ScalarProperty Name="StateNumber" ColumnName="StateNumber" />
                 <ScalarProperty Name="idBrand" ColumnName="idBrand" />
                 <ScalarProperty Name="VIN" ColumnName="VIN" />
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="idModel" ColumnName="idModel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -749,10 +770,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DateIs">
+            <EntityTypeMapping TypeName="CTPBDModel.DateIs">
+              <MappingFragment StoreEntitySet="DateIs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
+                <ScalarProperty Name="Procent" ColumnName="Procent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Experience">
+            <EntityTypeMapping TypeName="CTPBDModel.Experience">
+              <MappingFragment StoreEntitySet="Experience">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Procent" ColumnName="Procent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Law">
             <EntityTypeMapping TypeName="CTPBDModel.Law">
               <MappingFragment StoreEntitySet="Law">
-                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="images" ColumnName="images" />
                 <ScalarProperty Name="idLaw" ColumnName="idLaw" />
                 <ScalarProperty Name="idClient" ColumnName="idClient" />
                 <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
@@ -761,6 +800,7 @@
                 <ScalarProperty Name="Region" ColumnName="Region" />
                 <ScalarProperty Name="TPAuthority" ColumnName="TPAuthority" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="image" ColumnName="image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -770,6 +810,15 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idBrands" ColumnName="idBrands" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price">
+            <EntityTypeMapping TypeName="CTPBDModel.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Price1" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -791,52 +840,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Accident">
-            <EntityTypeMapping TypeName="CTPBDModel.Accident">
-              <MappingFragment StoreEntitySet="Accident">
-                <ScalarProperty Name="Procent" ColumnName="Procent" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DateIs">
-            <EntityTypeMapping TypeName="CTPBDModel.DateIs">
-              <MappingFragment StoreEntitySet="DateIs">
-                <ScalarProperty Name="Procent" ColumnName="Procent" />
-                <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Experience">
-            <EntityTypeMapping TypeName="CTPBDModel.Experience">
-              <MappingFragment StoreEntitySet="Experience">
-                <ScalarProperty Name="Procent" ColumnName="Procent" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Price">
-            <EntityTypeMapping TypeName="CTPBDModel.Price">
-              <MappingFragment StoreEntitySet="Price">
-                <ScalarProperty Name="Price1" ColumnName="Price" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Calculations">
-            <EntityTypeMapping TypeName="CTPBDModel.Calculations">
-              <MappingFragment StoreEntitySet="Calculations">
-                <ScalarProperty Name="idExperience" ColumnName="idExperience" />
-                <ScalarProperty Name="idDateis" ColumnName="idDateis" />
-                <ScalarProperty Name="idAccident" ColumnName="idAccident" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

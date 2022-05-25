@@ -64,7 +64,7 @@ namespace Insurance_Service.Pages
             }
             else if (selected.image != null)
             {
-                usrImage.Source = new BitmapImage(new Uri(selected.image, UriKind.RelativeOrAbsolute));
+              //  usrImage.Source = new BitmapImage(new Uri(selected.images, UriKind.RelativeOrAbsolute));
             }
         }
     }

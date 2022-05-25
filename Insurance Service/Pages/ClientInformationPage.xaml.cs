@@ -29,6 +29,10 @@ namespace Insurance_Service.Pages
             TBLastName.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBName.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBLastName.Text = CurrentUser.LastName;
+            TBFullName.Text = CurrentUser.FullName;
+            TBName.Text = CurrentUser.Name;
+            TBNumber.Text = CurrentUser.Number;
         }
 
         private void TBNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)

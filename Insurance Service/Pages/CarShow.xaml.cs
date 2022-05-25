@@ -22,6 +22,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class CarShow : Page
     {
+        Model.CTPBDEntities8 BD = new CTPBDEntities8();
         public CarShow()
         {
             InitializeComponent();
@@ -52,15 +53,27 @@ namespace Insurance_Service.Pages
         private void Bdelete_Click(object sender, RoutedEventArgs e)
         {
             var item = DGCar.SelectedItem as Model.Car;
+            Model.contract contract = BD_Connection.bd.contract.FirstOrDefault(a => a.idCar == item.idCar);
+            Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(a => a.idCar == item.idCar);
+            
             if (DGCar.SelectedItem == null)
             {
                 MessageBox.Show("select item");
                 return;
             }
-            BD_Connection.bd.Car.Remove((Model.Car)DGCar.SelectedItem);
-            BD_Connection.bd.SaveChanges();
-            MessageBox.Show("deleted");
-            Refresh();
+            if (sts != null || contract != null)
+            {
+                MessageBox.Show("на машину заведенны бумаги");
+            }
+            else
+            {
+                BD_Connection.bd.Car.Remove(item);
+                BD_Connection.bd.SaveChanges();
+                MessageBox.Show("deleted");
+                Refresh();
+                
+            }
+           
         }
     }
 }

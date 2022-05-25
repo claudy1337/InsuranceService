@@ -41,12 +41,6 @@ namespace Insurance_Service.Pages
         {
             try
             {
-                string a = CheckA.IsChecked.ToString();
-                string b = CheckB.IsChecked.ToString();
-                string c = CheckC.IsChecked.ToString();
-                string d = CheckD.IsChecked.ToString();
-                string c1e = CheckC1E.IsChecked.ToString();
-                List<string> chekc = new List<string>() { a, b, c, d, c1e };
                 if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text))
                 {
                     MessageBox.Show("incorrect");
@@ -54,6 +48,7 @@ namespace Insurance_Service.Pages
                 }
                 else
                 {
+                    byte[] array = Encoding.ASCII.GetBytes(photo);
                     var client = usr.SelectedItem as Client;
                     Model.Law law = BD_Connection.bd.Law.FirstOrDefault(l => l.Number == TBNumber.Text && l.idClient == client.idClient || l.idClient == client.idClient && l.TPAuthority == TBTPAuthority.Text);
                     if (law == null)
@@ -62,12 +57,12 @@ namespace Insurance_Service.Pages
                         {
                             idClient = client.idClient,
                             DateIssue = Convert.ToDateTime(DateIssue.Text),
-                            DateEnd = Convert.ToDateTime(DateEnd.Text),
+                            DateEnd = DateTime.Now.AddYears(2),
                             Number = TBNumber.Text,
                             Region = TBSignature.Text,
-                            Category = chekc.ToString(),
+                            Category = "B,M",
                             TPAuthority = TBTPAuthority.Text,
-                            image = photo
+                            images = array
 
                         };
                         BD_Connection.bd.Law.Add(lawCreate);
@@ -93,7 +88,6 @@ namespace Insurance_Service.Pages
             usr.Text = null;
             TBNumber.Text = null;
             TBTPAuthority.Text = null;
-            DateEnd.Text = null;
             DateIssue.Text = null;
             TBSignature.Text = null;
         }

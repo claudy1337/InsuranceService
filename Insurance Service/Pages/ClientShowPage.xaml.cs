@@ -26,7 +26,7 @@ namespace Insurance_Service.Pages
             InitializeComponent();
             if (CBclear.IsChecked == true)
             {
-                TBSearch.Text = null;
+               TBSearch.Text = null;
             }
             returnConnect(); 
             TBPasport.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
@@ -39,7 +39,13 @@ namespace Insurance_Service.Pages
         }
         private void BSearchUser_Click(object sender, RoutedEventArgs e)
         {
-            ltv.ItemsSource = BD_Connection.bd.Client.ToList().Where(c=>c.Login == TBSearch.Text || c.Number == TBSearch.Text || c.Name == TBSearch.Text);
+            if (CBclear.IsChecked == true)
+            {
+                Refresh();
+                ltv.ItemsSource = BD_Connection.bd.Client.ToList().Where(c => c.Login == TBSearch.Text || c.Number == TBSearch.Text || c.Name == TBSearch.Text);
+            }
+            Refresh();
+            //ltv.ItemsSource = BD_Connection.bd.Client.ToList().Where(c=>c.Login == TBSearch.Text || c.Number == TBSearch.Text || c.Name == TBSearch.Text);
             if (TBSearch.Text == "" || TBSearch.Text == null || CBclear.IsChecked == true)
             {
                 returnConnect();
@@ -58,13 +64,14 @@ namespace Insurance_Service.Pages
             TBBirthDay.Text = null;
             TBCity.Text = null;
             TBPasport.Text = null;
+           
         }
         private void ltv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selected = ltv.SelectedItem as Model.Client;
             try
             {
-                var selected = ltv.SelectedItem as Model.Client;
-                TBNameSplit.Text = string.Join(selected.FullName, " ", selected.Name, " ", selected.LastName);
+                TBNameSplit.Text = selected.Name;
                 TBCity.Text = selected.City;
                 TBLogin.Text = selected.Login;
                 TBNumber.Text = selected.Number;
@@ -94,11 +101,26 @@ namespace Insurance_Service.Pages
                 BD_Connection.bd.SaveChanges();
                 MessageBox.Show("client edit");
                 Refresh();
-                returnConnect();
             }
             else
                 MessageBox.Show("incorrect");
             
+        }
+
+        private void number(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void passport(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

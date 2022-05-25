@@ -108,6 +108,7 @@ namespace Insurance_Service.Pages
             CurrentUser.Name = null;
             CurrentUser.Number = null;
             CurrentUser.FullName = null;
+            CurrentUser.LastName = null;
         }
         private void Bclient_Click(object sender, RoutedEventArgs e)
         {

@@ -22,14 +22,14 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class CarAdd : Page
     {
-        Model.CTPBDEntities7 bd = new CTPBDEntities7();
+        Model.CTPBDEntities8 bd = new CTPBDEntities8();
         public CarAdd()
         {
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
             CBrand.ItemsSource = BD_Connection.bd.brand.ToList();
             TBColor.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
-            TBModel.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+           
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBVin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
 
@@ -103,15 +103,6 @@ namespace Insurance_Service.Pages
                 CBCar.ItemsSource = BD_Connection.bd.Model.Where(x => x.idBrands == brand.id).ToList();
             }
             
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var brands = BD_Connection.bd.Model.Where(b => b.brand.name == TBModel.Text).ToString();
-            if (brands != null)
-            {
-                CBrand.Text = brands;
-            }
         }
     }
 }
