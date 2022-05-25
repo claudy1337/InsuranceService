@@ -37,48 +37,55 @@ namespace Insurance_Service.Pages
         }
         private void Bsave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TBLogin.Text) && string.IsNullOrEmpty(TBPassport.Text) && string.IsNullOrEmpty(TBPassport.Text) && string.IsNullOrEmpty(BithDay.Text) && string.IsNullOrEmpty(TBCity.Text))
+            try
             {
-                MessageBox.Show("incorrect");
-                return;
-            }
-            Model.Admin admin = BD_Connection.bd.Admin.FirstOrDefault(a=> a.Login == TBLogin.Text);
-            if (admin == null)
-            {
-                Model.Client clients = BD_Connection.bd.Client.FirstOrDefault(c => c.Login == TBLogin.Text &&  c.Passport == TBPassport.Text || c.Passport == TBPassport.Text || c.Number == CurrentUser.Number);
-                if (CurrentUser.Name != null && CurrentUser.Number != null && CurrentUser.FullName != null && clients == null)
+                if (string.IsNullOrEmpty(TBLogin.Text) && string.IsNullOrEmpty(TBPassport.Text) && string.IsNullOrEmpty(TBPassport.Text) && string.IsNullOrEmpty(BithDay.Text) && string.IsNullOrEmpty(TBCity.Text))
                 {
-                    clientVerificated.Text = "client load";
-                    if (TBPassword.Text == TBPasswordReturn.Text && clients == null)
+                    MessageBox.Show("incorrect");
+                    return;
+                }
+                Model.Admin admin = BD_Connection.bd.Admin.FirstOrDefault(a => a.Login == TBLogin.Text);
+                if (admin == null)
+                {
+                    Model.Client clients = BD_Connection.bd.Client.FirstOrDefault(c => c.Login == TBLogin.Text && c.Passport == TBPassport.Text || c.Passport == TBPassport.Text || c.Number == CurrentUser.Number);
+                    if (CurrentUser.Name != null && CurrentUser.Number != null && CurrentUser.FullName != null && clients == null)
                     {
-                        Model.Client client = new Model.Client()
+                        clientVerificated.Text = "client load";
+                        if (TBPassword.Text == TBPasswordReturn.Text && clients == null)
                         {
-                            Name = CurrentUser.Name,
-                            LastName = CurrentUser.LastName,
-                            FullName = CurrentUser.FullName,
-                            Number = CurrentUser.Number,
-                            Login = TBLogin.Text,
-                            Password = TBPassword.Text,
-                            BirthDay = BithDay.Text,
-                            Passport = TBPassport.Text,
-                            City = TBCity.Text
-                        };
-                        BD_Connection.bd.Client.Add(client);
-                        BD_Connection.bd.SaveChanges();
-                        MessageBox.Show("client save");
-                        Refresh();
+                            Model.Client client = new Model.Client()
+                            {
+                                Name = CurrentUser.Name,
+                                LastName = CurrentUser.LastName,
+                                FullName = CurrentUser.FullName,
+                                Number = CurrentUser.Number,
+                                Login = TBLogin.Text,
+                                Password = TBPassword.Text,
+                                BirthDay = BithDay.Text,
+                                Passport = TBPassport.Text,
+                                City = TBCity.Text
+                            };
+                            BD_Connection.bd.Client.Add(client);
+                            BD_Connection.bd.SaveChanges();
+                            MessageBox.Show("client save");
+                            Refresh();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("error");
                     }
                 }
                 else
-                {
                     MessageBox.Show("error");
-                }
+
             }
-            else
-                MessageBox.Show("error");
-            
-            
-            
+            catch (FormatException)
+            {
+                MessageBox.Show("incorrect");
+                Refresh();
+            }
+
         }
         public void Verificated()
         {

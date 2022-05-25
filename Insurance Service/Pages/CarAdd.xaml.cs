@@ -40,37 +40,45 @@ namespace Insurance_Service.Pages
         }
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TBVin.Text) && string.IsNullOrWhiteSpace(TBColor.Text) && string.IsNullOrWhiteSpace(TBNumber.Text) && string.IsNullOrWhiteSpace(CBCar.Text) && string.IsNullOrWhiteSpace(CBClient.Text))
+            try
             {
-                MessageBox.Show("incorrect");
-            }
-            else
-            {
-                var client = CBClient.SelectedItem as Client;
-                var brand = CBrand.SelectedItem as brand;
-                var model = CBCar.SelectedItem as Model.Model;
-                Model.Car car = BD_Connection.bd.Car.FirstOrDefault(c => c.VIN == TBVin.Text || c.StateNumber == TBNumber.Text);
-                if (car == null)
+                if (string.IsNullOrEmpty(TBVin.Text) && string.IsNullOrWhiteSpace(TBColor.Text) && string.IsNullOrWhiteSpace(TBNumber.Text) && string.IsNullOrWhiteSpace(CBCar.Text) && string.IsNullOrWhiteSpace(CBClient.Text))
                 {
-                    Model.Car carCreate = new Model.Car()
-                    {
-                       StateNumber = TBNumber.Text,
-                       idBrand = brand.id,
-                       VIN = TBVin.Text,
-                       IdClient = client.idClient,
-                       Color = TBColor.Text,
-                       idModel = model.id
-
-                    };
-                    bd.Car.Add(carCreate);
-                    bd.SaveChanges();
-                    MessageBox.Show("car save");
-                    Refresh();
+                    MessageBox.Show("incorrect");
                 }
                 else
                 {
-                    MessageBox.Show("error");
+                    var client = CBClient.SelectedItem as Client;
+                    var brand = CBrand.SelectedItem as brand;
+                    var model = CBCar.SelectedItem as Model.Model;
+                    Model.Car car = BD_Connection.bd.Car.FirstOrDefault(c => c.VIN == TBVin.Text || c.StateNumber == TBNumber.Text);
+                    if (car == null)
+                    {
+                        Model.Car carCreate = new Model.Car()
+                        {
+                            StateNumber = TBNumber.Text,
+                            idBrand = brand.id,
+                            VIN = TBVin.Text,
+                            IdClient = client.idClient,
+                            Color = TBColor.Text,
+                            idModel = model.id
+
+                        };
+                        bd.Car.Add(carCreate);
+                        bd.SaveChanges();
+                        MessageBox.Show("car save");
+                        Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("error");
+                    }
                 }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("incorrect");
+                Refresh();
             }
         }
         public void Refresh()

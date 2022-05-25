@@ -39,40 +39,48 @@ namespace Insurance_Service.Pages
         string photo;
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            string a = CheckA.IsChecked.ToString();
-            string b = CheckB.IsChecked.ToString();
-            string c = CheckC.IsChecked.ToString();
-            string d = CheckD.IsChecked.ToString();
-            string c1e = CheckC1E.IsChecked.ToString();
-            List<string> chekc = new List<string>() { a, b, c, d, c1e };
-            if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text))
+            try
+            {
+                string a = CheckA.IsChecked.ToString();
+                string b = CheckB.IsChecked.ToString();
+                string c = CheckC.IsChecked.ToString();
+                string d = CheckD.IsChecked.ToString();
+                string c1e = CheckC1E.IsChecked.ToString();
+                List<string> chekc = new List<string>() { a, b, c, d, c1e };
+                if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text))
+                {
+                    MessageBox.Show("incorrect");
+                    return;
+                }
+                else
+                {
+                    var client = usr.SelectedItem as Client;
+                    Model.Law law = BD_Connection.bd.Law.FirstOrDefault(l => l.Number == TBNumber.Text && l.idClient == client.idClient || l.idClient == client.idClient && l.TPAuthority == TBTPAuthority.Text);
+                    if (law == null)
+                    {
+                        Model.Law lawCreate = new Model.Law()
+                        {
+                            idClient = client.idClient,
+                            DateIssue = Convert.ToDateTime(DateIssue.Text),
+                            DateEnd = Convert.ToDateTime(DateEnd.Text),
+                            Number = TBNumber.Text,
+                            Region = TBSignature.Text,
+                            Category = chekc.ToString(),
+                            TPAuthority = TBTPAuthority.Text,
+                            image = photo
+
+                        };
+                        BD_Connection.bd.Law.Add(lawCreate);
+                        BD_Connection.bd.SaveChanges();
+                        MessageBox.Show("law save");
+                        Refresh();
+                    }
+                }
+            }
+            catch (FormatException)
             {
                 MessageBox.Show("incorrect");
-                return;
-            }
-            else
-            {
-                var client = usr.SelectedItem as Client;
-                Model.Law law = BD_Connection.bd.Law.FirstOrDefault(l => l.Number == TBNumber.Text && l.idClient == client.idClient || l.idClient == client.idClient && l.TPAuthority == TBTPAuthority.Text);
-                if (law == null)
-                {
-                    Model.Law lawCreate = new Model.Law()
-                    {
-                        idClient = client.idClient,
-                        DateIssue = Convert.ToDateTime(DateIssue.Text),
-                        DateEnd = Convert.ToDateTime(DateEnd.Text),
-                        Number = TBNumber.Text,
-                        Region = TBSignature.Text,
-                        Category = chekc.ToString(),
-                        TPAuthority = TBTPAuthority.Text,
-                        image = photo
-                        
-                    };
-                    BD_Connection.bd.Law.Add(lawCreate);
-                    BD_Connection.bd.SaveChanges();
-                    MessageBox.Show("law save");
-                    Refresh();
-                }
+                Refresh();
             }
         }
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

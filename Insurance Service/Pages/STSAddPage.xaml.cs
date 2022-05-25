@@ -45,25 +45,33 @@ namespace Insurance_Service.Pages
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            var car = CBCar.SelectedItem as Model.Car;
-            var client = CBClient.SelectedItem as Model.Client;
-            if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
+            try
             {
-                Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s=> s.STSNumber == TBNumber.Text);
-                if (sts == null)
+                var car = CBCar.SelectedItem as Model.Car;
+                var client = CBClient.SelectedItem as Model.Client;
+                if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
                 {
-                    Model.STS stsCreate = new Model.STS()
+                    Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text);
+                    if (sts == null)
                     {
-                        idCar = car.idCar,
-                        idClient = client.idClient,
-                        STSNumber = TBNumber.Text
-                    };
-                    BD_Connection.bd.STS.Add(stsCreate);
-                    BD_Connection.bd.SaveChanges();
-                    MessageBox.Show("sts save");
-                    Refresh();
+                        Model.STS stsCreate = new Model.STS()
+                        {
+                            idCar = car.idCar,
+                            idClient = client.idClient,
+                            STSNumber = TBNumber.Text
+                        };
+                        BD_Connection.bd.STS.Add(stsCreate);
+                        BD_Connection.bd.SaveChanges();
+                        MessageBox.Show("sts save");
+                        Refresh();
+                    }
+
                 }
-               
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("incorrect");
+                Refresh();
             }
         }
         public void Refresh()
