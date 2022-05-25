@@ -23,10 +23,10 @@
                 <DataGridTextColumn Header="id" Binding="{Binding idSTS}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Client.Name}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Client.LastName}"/>
-                <DataGridTextColumn Header="Login" Binding="{Binding Client.login}"/>
+                <DataGridTextColumn Header="Login" Binding="{Binding Client.Login}"/>
                 <DataGridTextColumn Header="Number" Binding="{Binding STSNumber}"/>
-                <DataGridTextColumn Header="Brand" Binding="{Binding Car.brand}"/>
-                <DataGridTextColumn Header="Model" Binding="{Binding Car.Model}"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Car.brand.name}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Car.Model.Name}"/>
 
             </DataGrid.Columns>
         </DataGrid>

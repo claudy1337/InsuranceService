@@ -29,8 +29,14 @@ namespace Insurance_Service.Pages
                 TBSearch.Text = null;
             }
             returnConnect(); 
+            TBPasport.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBCity.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
 
+        }
         private void BSearchUser_Click(object sender, RoutedEventArgs e)
         {
             ltv.ItemsSource = BD_Connection.bd.Client.ToList().Where(c=>c.Login == TBSearch.Text || c.Number == TBSearch.Text || c.Name == TBSearch.Text);
@@ -55,7 +61,6 @@ namespace Insurance_Service.Pages
         }
         private void ltv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             try
             {
                 var selected = ltv.SelectedItem as Model.Client;
@@ -69,8 +74,7 @@ namespace Insurance_Service.Pages
             catch (System.NullReferenceException ex)
             { 
                 Console.WriteLine(ex.Message); 
-            }
-            
+            } 
         }
 
         private void BBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -27,9 +27,15 @@ namespace Insurance_Service.Pages
         {
             InitializeComponent();
             lst.ItemsSource = BD_Connection.bd.Law.ToList();
-           
+            TBIdClient.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBTPAuthority.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            TBSignature.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
+        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
+        {
 
+        }
         private void EDIT_Click(object sender, RoutedEventArgs e)
         {
 

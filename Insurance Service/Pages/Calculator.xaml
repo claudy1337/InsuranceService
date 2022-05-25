@@ -109,7 +109,11 @@
 
                             <Button Width="250" Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER PRICE" x:Name="getPrice" Click="getPrice_Click"/>
                             <TextBlock x:Name="price" HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Ubuntu" FontSize="24"/>
-                            <TextBlock Text="Back" Margin="20,15,0,0" FontFamily="Ubuntu" FontSize="24" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Back" Margin="20,15,0,0" FontFamily="Ubuntu" FontSize="24" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                                <TextBlock Text="Create" VerticalAlignment="Center" Margin="220,15,0,0" FontFamily="Ubuntu" FontSize="24" HorizontalAlignment="Right" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
+                            </StackPanel>
+                         
                         </StackPanel>
                     </Grid>
                 </StackPanel>

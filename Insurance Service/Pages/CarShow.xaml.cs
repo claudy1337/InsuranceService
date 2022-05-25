@@ -48,5 +48,19 @@ namespace Insurance_Service.Pages
             DGCar.ItemsSource = null;
             DGCar.ItemsSource = BD_Connection.bd.Car.ToList();
         }
+
+        private void Bdelete_Click(object sender, RoutedEventArgs e)
+        {
+            var item = DGCar.SelectedItem as Model.Car;
+            if (DGCar.SelectedItem == null)
+            {
+                MessageBox.Show("select item");
+                return;
+            }
+            BD_Connection.bd.Car.Remove((Model.Car)DGCar.SelectedItem);
+            BD_Connection.bd.SaveChanges();
+            MessageBox.Show("deleted");
+            Refresh();
+        }
     }
 }

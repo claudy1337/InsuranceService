@@ -37,6 +37,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class Calculator : Page
     {
+        Assets.Assets assets;
         public Calculator()
         {
             InitializeComponent();
@@ -68,91 +69,134 @@ namespace Insurance_Service.Pages
         public void Refresh()
         {
             int procent = Assets.Assets.procent;
+            int price = Assets.Assets.Price;
+
+            var brand = CBrand.SelectedItem as Model.brand;
+            var model = CBCar.SelectedItem as Model.Model;
+            var accident = CBAccident.SelectedItem as Model.Accident;
+
+            int experience = Convert.ToInt32(TBExperience.Text);
+            int year = Convert.ToInt32(TBYear.Text);
+
             if (string.IsNullOrEmpty(TBExperience.Text) && string.IsNullOrEmpty(TBYear.Text) && string.IsNullOrWhiteSpace(CBAccident.Text) && string.IsNullOrWhiteSpace(CBrand.Text))
             {
                 MessageBox.Show("incorrect");
             }
             else
             {
-                var idCar = CBrand.SelectedItem as Model.brand;
-                if (idCar != null) 
+                if (brand.id < 20 && brand.id > 1)
                 {
-                    int getPrice = Assets.Assets.Price;
-                    if (idCar.id > 150)
-                        getPrice += 1000;
-                    else if (idCar.id > 1000)
-                        getPrice += 500;
-                    else if (idCar.id > 50)
-                        getPrice += 250;
-                    else if (idCar.id > 7)
-                        getPrice += 150;
-                    else if (idCar.id > 5)
-                        getPrice += 100;
-                    else
-                    {
-                        getPrice += 50;
-                    }
-
-                    var accident = CBAccident.SelectedItem as Model.Accident;
-                    if (accident != null)
-                    {
-                        if (getPrice > 2100)
-                        {
-                            int Accidentp = 10;
-                            procent += Accidentp;
-                            var year = Convert.ToInt32(TBYear.Text);
-                            if (year < 2019 && year > 2017)
-                            {
-                                procent += 1;
-                            }
-                            else if (year < 2021 && year > 2019)
-                                procent += 5;
-                            else if (year < 2022 && year > 2021)
-                            {
-                                procent += 10;
-                            }
-                            else
-                                getPrice -= 1000;
-
-                            int experiences = Convert.ToInt32(TBExperience.Text);
-                            if (experiences > 20 && experiences < 99)
-                            {
-                                getPrice -= 1000;
-                            }
-                            else if (experiences > 10 && experiences < 20)
-                                getPrice += 1500;
-                            else
-                                getPrice += 2000;
-
-                            int results = (procent + 100) * getPrice / 10000; //:)logic the best all fun
-                            MessageBox.Show($"{results}");
-
-                        }
-                        else
-                            getPrice += 1000;
-
-                        int experience = Convert.ToInt32(TBExperience.Text);
-                        if (experience > 20 && experience < 99)
-                        {
-                            getPrice -= 1000;
-                        }
-                        else if (experience > 10 && experience < 20)
-                            getPrice += 1500;
-                        else
-                            getPrice += 2000;
-
-                        int result = (procent + 500) * getPrice / 10000;
-
-                        TBPrice.Text = $"{result} doll";
-                    }
+                    price += 1000;
+                    procent += 2;
                 }
-                else
-                    MessageBox.Show("incorrect");
+                else if (brand.id < 40 && brand.id > 20)
+                {
+                    price += 2000;
+                    procent += 5;
+                }
+                else if (brand.id < 80 && brand.id > 40)
+                {
+                    price += 3000;
+                    procent += 7;
+                }
+                else if (brand.id < 120 && brand.id > 80)
+                {
+                    price += 3500;
+                    procent += 5;
+                }
+                else if (brand.id < 250 && brand.id > 120)
+                {
+                    price += 3000;
+                    procent += 5;
+                }
+
+                if (model.id < 4 && model.id >1 )
+                {
+                    procent += 10;
+                }
+                else if (model.id < 10 && model.id > 4)
+                {
+                    procent += 7;
+                }
+
+                if (accident.Count == 10)
+                {
+                    procent += 10;
+                    price += 300;
+                }
+                else if (accident.Count == 5)
+                {
+                    procent += 5;
+                    price += 250;
+                }
+                else if (accident.Count == 3)
+                {
+                    procent += 3;
+                    price += 150;
+                }
+                else if (accident.Count == 1)
+                {
+                    procent += 1;
+                    price += 100;
+                }
+
+
+                if (experience > 5 && experience < 10)
+                {
+                    procent += 15;
+                }
+                else if (experience > 10 && experience < 25)
+                {
+                    procent += 5;
+                }
+                else if (experience > 25 && experience < 40)
+                {
+                    procent += 3;
+                }
+                else if (experience > 40 && experience < 99)
+                {
+                    procent += 1;
+                }
+
+                if (year > 2021 && year < 2023)
+                {
+                    procent += 10;
+                    price += 500;
+                }
+                else if (year > 2018 && year < 2021)
+                {
+                    procent += 5;
+                    price += 100;
+                }
+                else if (year > 2015 && year < 2018)
+                {
+                    price += 50;
+                    procent += 3;
+                }
+                else if (year > 1980 && year < 2015)
+                {
+                    price += 10;
+                }
+                
+
+                Assets.Assets.valuePrice = price * procent;
+                TBPrice.Text = $"{Assets.Assets.valuePrice}";
+                if (Assets.Assets.valuePrice > 100000)
+                {
+
+                    Assets.Assets.valuePrice = price / 10 - 10000;
+                    TBPrice.Text = $"{Assets.Assets.valuePrice}";
+                }
             }
         }
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new ContractAddPage());
         }
     }
 }

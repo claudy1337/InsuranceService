@@ -6,10 +6,65 @@
       xmlns:local="clr-namespace:Insurance_Service.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ContractAddPage"
-      Background="White">
+      Title="ContractAddPage" Background="White"
+      xmlns:material ="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Contract Add" FontSize="24" FontFamily="Ubuntu"/>
+            <ComboBox
+    x:Name="CBCar"
+    Margin="0,20,0,0"
+    HorizontalAlignment="Left"
+    DisplayMemberPath="StateNumber"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Car"
+    Width="300" />
+
+            <TextBox
+                  MaxLength="2"
+                  Width="300"
+                  x:Name="TBExperience"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Experience"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow" PreviewTextInput="Experience"/>
+
+            <ComboBox
+    x:Name="CBAccident"
+    Margin="0,20,0,0"
+    HorizontalAlignment="Left"
+    DisplayMemberPath="Count"
+    Style="{StaticResource MaterialDesignFilledComboBox}"
+    IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+    material:HintAssist.Hint="Procent Accident"
+    Width="300" />
+
+            <TextBox
+                  IsEnabled="False"
+                  Width="300"
+                  x:Name="TBPrice"
+                  Margin="0,20,0,0"
+                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                  VerticalAlignment="Top"
+                  TextWrapping="Wrap"
+                  material:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  material:HintAssist.Hint="Price"
+                  FontFamily="Ubuntu Light"
+                  FontSize="15" Cursor="Arrow"/>
+            <Button Width="250" Background="#388F72" Height="45" Margin="0,20,0,0" Content="ENTER PRICE" x:Name="getPrice" Click="getPrice_Click"/>
+            <TextBlock Text="Look price" Margin="0,10,0,0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" FontSize="24" FontFamily="Ubuntu"/>
+        </StackPanel>
+        <Image Source="/Assets/contract.jpg" Grid.Column="1" Margin="10"/>
+
     </Grid>
 </Page>

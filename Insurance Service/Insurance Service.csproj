@@ -335,6 +335,7 @@
     <Resource Include="Assets\CarCard.png" />
     <Resource Include="Assets\background.jpg" />
     <Resource Include="Assets\Insure.png" />
+    <Resource Include="Assets\contract.jpg" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

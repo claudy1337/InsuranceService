@@ -8,9 +8,10 @@ namespace Insurance_Service.Assets
 {
     public class Assets
     {
-        public static int Price = 2000;
+        public static int Price = 0;
         public static int maxPrice = 100000;
         public static int procent = 1;
+        public static int valuePrice;
         public class Client
         {
             public int Id { get; set; }

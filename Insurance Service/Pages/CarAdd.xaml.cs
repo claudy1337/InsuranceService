@@ -62,8 +62,8 @@ namespace Insurance_Service.Pages
                        idModel = model.id
 
                     };
-                    BD_Connection.bd.Car.Add(carCreate);
-                    BD_Connection.bd.SaveChanges();
+                    bd.Car.Add(carCreate);
+                    bd.SaveChanges();
                     MessageBox.Show("car save");
                     Refresh();
                 }

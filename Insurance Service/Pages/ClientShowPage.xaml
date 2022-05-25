@@ -74,6 +74,7 @@
                   FontFamily="Ubuntu Light"
                   FontSize="15"/>
                     <TextBox
+                  IsEnabled="False"
                   x:Name="TBNameSplit"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
@@ -116,6 +117,7 @@
                   FontSize="15"/>
                     <TextBox
                   x:Name="TBPasport"
+                  MaxLength="10"
                   Style="{StaticResource MaterialDesignFilledTextBox}"
                   VerticalAlignment="Top"
                   TextWrapping="Wrap"

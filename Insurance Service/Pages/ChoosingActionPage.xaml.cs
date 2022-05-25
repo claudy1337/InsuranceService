@@ -20,6 +20,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ChoosingActionPage : Page
     {
+        Assets.Assets assets;
         public ChoosingActionPage()
         {
             InitializeComponent();
@@ -68,11 +69,6 @@ namespace Insurance_Service.Pages
         private void ContractShow_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ContractShowPage());
-        }
-
-        private void ContractAdd_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ContractAddPage());
         }
 
         private void Calculator_Click(object sender, RoutedEventArgs e)

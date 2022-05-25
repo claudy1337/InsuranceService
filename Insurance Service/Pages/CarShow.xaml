@@ -14,7 +14,11 @@
             <RowDefinition/>
             <RowDefinition Height="auto" MinHeight="75"/>
         </Grid.RowDefinitions>
-        <Button Width="100" x:Name="BBack" Content="Back" Click="BBack_Click" HorizontalAlignment="Left" Background="#388F72" Margin="5,5,0,5" Cursor="Hand"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Width="100" x:Name="BBack" Content="Back" Click="BBack_Click" HorizontalAlignment="Left" Background="#388F72" Margin="5,5,0,5" Cursor="Hand"/>
+            <Button Width="100" Background="#388F72" Content="Delete" HorizontalAlignment="Right" Margin="575,5,0,0" x:Name="Bdelete" Click="Bdelete_Click"/>
+        </StackPanel>
+      
         <DataGrid Grid.Row="1" x:Name="DGCar" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"  Margin="0,28,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Binding="{Binding idCar}"/>
