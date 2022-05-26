@@ -27,6 +27,7 @@ namespace Insurance_Service.Pages
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
             CBCar.ItemsSource = BD_Connection.bd.Car.ToList();
+            
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
         }
         public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
@@ -49,28 +50,28 @@ namespace Insurance_Service.Pages
             {
                 var car = CBCar.SelectedItem as Model.Car;
                 var client = CBClient.SelectedItem as Model.Client;
-                if (string.IsNullOrEmpty(CBClient.Text) && string.IsNullOrEmpty(CBCar.Text) && string.IsNullOrWhiteSpace(TBNumber.Text))
+               
+                Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text || s.idClient == client.idClient);
+                if (sts == null)
                 {
-                    Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text || s.idClient == client.idClient);
-                    if (sts == null)
+                    Model.STS stsCreate = new Model.STS()
                     {
-                        Model.STS stsCreate = new Model.STS()
-                        {
-                            idCar = car.idCar,
-                            idClient = client.idClient,
-                            STSNumber = TBNumber.Text
-                        };
-                        BD_Connection.bd.STS.Add(stsCreate);
-                        BD_Connection.bd.SaveChanges();
-                        MessageBox.Show("sts save");
-                        Refresh();
-                    }
-                    else
-                    {
-                        
-                    }
-
+                        idCar = car.idCar,
+                        idClient = client.idClient,
+                        STSNumber = TBNumber.Text
+                    };
+                    BD_Connection.bd.STS.Add(stsCreate);
+                    BD_Connection.bd.SaveChanges();
+                    MessageBox.Show("sts save");
+                    Refresh();
                 }
+                else
+                {
+                    MessageBox.Show("incorrect");
+                }
+
+
+
             }
             catch (FormatException)
             {
@@ -96,6 +97,16 @@ namespace Insurance_Service.Pages
 
         private void CBCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void CBClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var client = CBClient.SelectedItem as Model.Client;
+            
+            if (client != null)
+            {
+                CBCar.ItemsSource = BD_Connection.bd.Car.Where(x => x.IdClient == client.idClient).ToList();
+            }
         }
     }
 }

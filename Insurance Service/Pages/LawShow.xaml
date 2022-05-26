@@ -45,7 +45,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 
-                <TextBlock Text="Client Add" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" />
+                <TextBlock Text="Law Show" FontFamily="Ubuntu Medium" FontSize="24" VerticalAlignment="Center" Margin="60,0,0,0" />
             </StackPanel>
             <TextBox
                   x:Name="TBIdClient"

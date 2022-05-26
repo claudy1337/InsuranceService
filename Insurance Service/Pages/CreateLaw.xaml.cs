@@ -26,11 +26,16 @@ namespace Insurance_Service.Pages
         public CreateLaw()
         {
             InitializeComponent();
-            usr.ItemsSource = BD_Connection.bd.Client.ToList();
+            
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBSignature.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBTPAuthority.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
-
+            Model.Law law = BD_Connection.bd.Law.FirstOrDefault();
+            var item = BD_Connection.bd.Client.ToList().Where(u=>u.idClient == law.idClient);
+            if (item != null)
+            {
+                usr.ItemsSource = BD_Connection.bd.Client.ToList().Where(u => u.idClient != law.idClient);
+            }
         }
         public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
         {
@@ -41,16 +46,16 @@ namespace Insurance_Service.Pages
         {
             try
             {
-                if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text))
+                byte[] array = Encoding.ASCII.GetBytes(photo);
+                if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text) && array == null)
                 {
                     MessageBox.Show("incorrect");
                     return;
                 }
                 else
                 {
-                    byte[] array = Encoding.ASCII.GetBytes(photo);
                     var client = usr.SelectedItem as Client;
-                    Model.Law law = BD_Connection.bd.Law.FirstOrDefault(l => l.Number == TBNumber.Text && l.idClient == client.idClient || l.idClient == client.idClient && l.TPAuthority == TBTPAuthority.Text);
+                    Model.Law law = BD_Connection.bd.Law.FirstOrDefault(l => l.Number == TBNumber.Text || l.idClient == client.idClient || l.idClient == client.idClient || l.TPAuthority == TBTPAuthority.Text);
                     if (law == null)
                     {
                         Model.Law lawCreate = new Model.Law()
@@ -69,6 +74,10 @@ namespace Insurance_Service.Pages
                         BD_Connection.bd.SaveChanges();
                         MessageBox.Show("law save");
                         Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("права уже есть");
                     }
                 }
             }
