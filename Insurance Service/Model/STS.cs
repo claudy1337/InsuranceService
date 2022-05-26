@@ -15,11 +15,9 @@ namespace Insurance_Service.Model
     public partial class STS
     {
         public int idSTS { get; set; }
-        public Nullable<int> idClient { get; set; }
         public Nullable<int> idCar { get; set; }
         public string STSNumber { get; set; }
     
         public virtual Car Car { get; set; }
-        public virtual Client Client { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Insurance_Service.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Car()
         {
-            this.contract = new HashSet<contract>();
+            this.Contract = new HashSet<Contract>();
             this.STS = new HashSet<STS>();
         }
     
@@ -29,11 +29,10 @@ namespace Insurance_Service.Model
         public string Color { get; set; }
         public Nullable<int> idModel { get; set; }
     
-        public virtual brand brand { get; set; }
+        public virtual Brand Brand { get; set; }
         public virtual Client Client { get; set; }
-        public virtual Model Model { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contract> contract { get; set; }
+        public virtual ICollection<Contract> Contract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STS> STS { get; set; }
     }

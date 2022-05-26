@@ -12,7 +12,7 @@ namespace Insurance_Service.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class contract
+    public partial class Contract
     {
         public int idContract { get; set; }
         public Nullable<int> idCar { get; set; }

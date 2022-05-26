@@ -31,22 +31,24 @@ namespace Insurance_Service.Pages
         }
         private void auth_Click(object sender, RoutedEventArgs e)
         {
-            Model.Admin admin = BD_Connection.bd.Admin.FirstOrDefault(a=> a.Login == TBLogin.Text && a.Password == TBPassword.Text);
+            Role role = BD_Connection.bd.Role.FirstOrDefault();
             Model.Client clientData = BD_Connection.bd.Client.FirstOrDefault(c=> c.Login == TBLogin.Text && c.Password == TBPassword.Text);
-            if (clientData != null)
+            if (clientData.idRole == 1)
             {
                 
-                MessageBox.Show("welcome: " + clientData.Name);
+                MessageBox.Show("welcome user: " + clientData.Name);
             }
-            else if(admin != null)
+            else if(clientData.idRole == 2)
             {
                 NavigationService.Navigate(new ChoosingActionPage());
-                MessageBox.Show("welcome: " + admin.Name);
+                MessageBox.Show("welcome admin: " + clientData.Name);
+            }
+            else if (true)
+            {
+                MessageBox.Show("welcome prodavech: " + clientData.Name);
             }
             else
-            {
                 MessageBox.Show("error");
-            }
         }
         public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
         {

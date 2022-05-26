@@ -43,8 +43,8 @@ namespace Insurance_Service.Pages
             {
                 Refresh();
             }
-            DGSsts.ItemsSource = BD_Connection.bd.STS.ToList().Where(s=>s.Client.Login == TBSearch.Text ||
-            s.Car.brand.name == TBSearch.Text || s.Car.Model.Name == TBSearch.Text || s.STSNumber == TBSearch.Text);
+           // DGSsts.ItemsSource = BD_Connection.bd.STS.ToList().Where(s=>s.Client.Login == TBSearch.Text ||
+          //  s.Car.Brand.name == TBSearch.Text || s.STSNumber == TBSearch.Text);
         }
     }
 }

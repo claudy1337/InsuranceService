@@ -50,7 +50,7 @@ namespace Insurance_Service.Pages
             Maths();
             var accident = CBAccident.SelectedItem as Model.Accident;
             var cars = CBCar.SelectedItem as Model.Car;
-            Model.contract contracts = BD_Connection.bd.contract.FirstOrDefault(c => c.idCar == cars.idCar);
+            Model.Contract contracts = BD_Connection.bd.Contract.FirstOrDefault(c => c.idCar == cars.idCar);
             if (string.IsNullOrEmpty(TBExperience.Text) && string.IsNullOrEmpty(CBAccident.Text) && string.IsNullOrEmpty(CBCar.Text))
             {
                 MessageBox.Show("incorrect");
@@ -61,7 +61,7 @@ namespace Insurance_Service.Pages
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        Model.contract contract;
+                        Model.Contract contract;
                         var car = CBCar.SelectedItem as Model.Car;
                         if (car != null)
                         {
@@ -87,14 +87,14 @@ namespace Insurance_Service.Pages
             else
             {
                 Maths();
-                Model.contract contract = new contract()
+                Model.Contract contract = new Contract()
                 {
                     idCar = cars.idCar,
                     Experience = Convert.ToInt32(TBExperience.Text),
                     ProcentAccidents = accident.id,
                     Price = Assets.Assets.valuePrice
                 };
-                BD_Connection.bd.contract.Add(contract);
+                BD_Connection.bd.Contract.Add(contract);
                 BD_Connection.bd.SaveChanges();
                 MessageBox.Show("contract save");
                 Refresh();

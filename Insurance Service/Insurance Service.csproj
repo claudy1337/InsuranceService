@@ -126,7 +126,7 @@
     <Compile Include="Model\Admin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\brand.cs">
+    <Compile Include="Model\Brand.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Calculations.cs">
@@ -138,7 +138,7 @@
     <Compile Include="Model\Client.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\contract.cs">
+    <Compile Include="Model\Contract.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DateIs.cs">
@@ -168,7 +168,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Price.cs">
+    <Compile Include="Model\Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\STS.cs">
@@ -337,6 +337,7 @@
     <Resource Include="Assets\Insure.png" />
     <Resource Include="Assets\contract.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -22,7 +22,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class CarShow : Page
     {
-        Model.CTPBDEntities8 BD = new CTPBDEntities8();
+        Model.CTPBDEntities BD = new CTPBDEntities();
         public CarShow()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace Insurance_Service.Pages
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             DGCar.ItemsSource = BD_Connection.bd.Car.ToList().Where(c=>c.Client.Login == TBSearch.Text || 
-            c.VIN == TBSearch.Text || c.brand.name == TBSearch.Text || c.Color == TBSearch.Text || c.Model.Name == TBSearch.Text);
+            c.VIN == TBSearch.Text || c.Brand.name == TBSearch.Text || c.Color == TBSearch.Text);
             if (TBSearch.Text == "")
             {
                 Refresh();
@@ -53,7 +53,7 @@ namespace Insurance_Service.Pages
         private void Bdelete_Click(object sender, RoutedEventArgs e)
         {
             var item = DGCar.SelectedItem as Model.Car;
-            Model.contract contract = BD_Connection.bd.contract.FirstOrDefault(a => a.idCar == item.idCar);
+            Model.Contract contract = BD_Connection.bd.Contract.FirstOrDefault(a => a.idCar == item.idCar);
             Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(a => a.idCar == item.idCar);
             
             if (DGCar.SelectedItem == null)

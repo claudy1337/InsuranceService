@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище CTPBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище CTPBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accident">
           <Key>
             <PropertyRef Name="id" />
@@ -22,7 +22,7 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="brand">
+        <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -60,12 +60,13 @@
           <Property Name="FullName" Type="nvarchar" MaxLength="50" />
           <Property Name="BirthDay" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idRole" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="contract">
+        <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="idContract" />
           </Key>
@@ -114,20 +115,18 @@
           <Property Name="idBrands" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Price">
+        <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="idRole" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRole" Type="int" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="STS">
           <Key>
             <PropertyRef Name="idSTS" />
           </Key>
           <Property Name="idSTS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idClient" Type="int" />
           <Property Name="idCar" Type="int" />
           <Property Name="STSNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -178,10 +177,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Car_brand">
-          <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="brand">
+            <Principal Role="Brand">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Car">
@@ -201,26 +200,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Car_Model">
-          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
-          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+        <Association Name="FK_Client_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="id" />
+            <Principal Role="Role">
+              <PropertyRef Name="idRole" />
             </Principal>
-            <Dependent Role="Car">
-              <PropertyRef Name="idModel" />
+            <Dependent Role="Client">
+              <PropertyRef Name="idRole" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_contract_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
-          <End Role="contract" Type="Self.contract" Multiplicity="*" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Car">
               <PropertyRef Name="idCar" />
             </Principal>
-            <Dependent Role="contract">
+            <Dependent Role="Contract">
               <PropertyRef Name="idCar" />
             </Dependent>
           </ReferentialConstraint>
@@ -238,10 +237,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Model_brand">
-          <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
           <End Role="Model" Type="Self.Model" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="brand">
+            <Principal Role="Brand">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Model">
@@ -261,31 +260,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_STS_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
-          <End Role="STS" Type="Self.STS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="idClient" />
-            </Principal>
-            <Dependent Role="STS">
-              <PropertyRef Name="idClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Хранилище CTPBDModelContainer">
           <EntitySet Name="Accident" EntityType="Self.Accident" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="brand" EntityType="Self.brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Calculations" EntityType="Self.Calculations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="contract" EntityType="Self.contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DateIs" EntityType="Self.DateIs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Experience" EntityType="Self.Experience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Law" EntityType="Self.Law" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STS" EntityType="Self.STS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Calculations_Accident" Association="Self.FK_Calculations_Accident">
@@ -301,39 +288,36 @@
             <End Role="Calculations" EntitySet="Calculations" />
           </AssociationSet>
           <AssociationSet Name="FK_Car_brand" Association="Self.FK_Car_brand">
-            <End Role="brand" EntitySet="brand" />
+            <End Role="Brand" EntitySet="Brand" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
           <AssociationSet Name="FK_Car_Client1" Association="Self.FK_Car_Client1">
             <End Role="Client" EntitySet="Client" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
-          <AssociationSet Name="FK_Car_Model" Association="Self.FK_Car_Model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="Car" EntitySet="Car" />
+          <AssociationSet Name="FK_Client_Role" Association="Self.FK_Client_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Client" EntitySet="Client" />
           </AssociationSet>
           <AssociationSet Name="FK_contract_Car" Association="Self.FK_contract_Car">
             <End Role="Car" EntitySet="Car" />
-            <End Role="contract" EntitySet="contract" />
+            <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
           <AssociationSet Name="FK_Law_Client" Association="Self.FK_Law_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Law" EntitySet="Law" />
           </AssociationSet>
           <AssociationSet Name="FK_Model_brand" Association="Self.FK_Model_brand">
-            <End Role="brand" EntitySet="brand" />
+            <End Role="Brand" EntitySet="Brand" />
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
           <AssociationSet Name="FK_STS_Car" Association="Self.FK_STS_Car">
             <End Role="Car" EntitySet="Car" />
             <End Role="STS" EntitySet="STS" />
           </AssociationSet>
-          <AssociationSet Name="FK_STS_Client" Association="Self.FK_STS_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="STS" EntitySet="STS" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CTPBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -355,14 +339,14 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="brand">
+        <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Car" Relationship="Self.FK_Car_brand" FromRole="brand" ToRole="Car" />
-          <NavigationProperty Name="Model" Relationship="Self.FK_Model_brand" FromRole="brand" ToRole="Model" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Car_brand" FromRole="Brand" ToRole="Car" />
+          <NavigationProperty Name="Model" Relationship="Self.FK_Model_brand" FromRole="Brand" ToRole="Model" />
         </EntityType>
         <EntityType Name="Calculations">
           <Key>
@@ -387,10 +371,9 @@
           <Property Name="IdClient" Type="Int32" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idModel" Type="Int32" />
-          <NavigationProperty Name="brand" Relationship="Self.FK_Car_brand" FromRole="Car" ToRole="brand" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Car_brand" FromRole="Car" ToRole="Brand" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Car_Client1" FromRole="Car" ToRole="Client" />
-          <NavigationProperty Name="Model" Relationship="Self.FK_Car_Model" FromRole="Car" ToRole="Model" />
-          <NavigationProperty Name="contract" Relationship="Self.FK_contract_Car" FromRole="Car" ToRole="contract" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_contract_Car" FromRole="Car" ToRole="Contract" />
           <NavigationProperty Name="STS" Relationship="Self.FK_STS_Car" FromRole="Car" ToRole="STS" />
         </EntityType>
         <EntityType Name="Client">
@@ -403,15 +386,16 @@
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BirthDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idRole" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Car_Client1" FromRole="Client" ToRole="Car" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Client_Role" FromRole="Client" ToRole="Role" />
           <NavigationProperty Name="Law" Relationship="Self.FK_Law_Client" FromRole="Client" ToRole="Law" />
-          <NavigationProperty Name="STS" Relationship="Self.FK_STS_Client" FromRole="Client" ToRole="STS" />
         </EntityType>
-        <EntityType Name="contract">
+        <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="idContract" />
           </Key>
@@ -420,7 +404,7 @@
           <Property Name="Experience" Type="Int32" />
           <Property Name="ProcentAccidents" Type="Int32" />
           <Property Name="Price" Type="Int32" />
-          <NavigationProperty Name="Car" Relationship="Self.FK_contract_Car" FromRole="contract" ToRole="Car" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_contract_Car" FromRole="Contract" ToRole="Car" />
         </EntityType>
         <EntityType Name="DateIs">
           <Key>
@@ -453,8 +437,8 @@
           <Property Name="TPAuthority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
           <Property Name="images" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -463,27 +447,24 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="idBrands" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="brand" Relationship="Self.FK_Model_brand" FromRole="Model" ToRole="brand" />
-          <NavigationProperty Name="Car" Relationship="Self.FK_Car_Model" FromRole="Model" ToRole="Car" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Model_brand" FromRole="Model" ToRole="Brand" />
         </EntityType>
-        <EntityType Name="Price">
+        <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="idRole" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRole" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price1" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Role" FromRole="Role" ToRole="Client" />
         </EntityType>
         <EntityType Name="STS">
           <Key>
             <PropertyRef Name="idSTS" />
           </Key>
           <Property Name="idSTS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idClient" Type="Int32" />
           <Property Name="idCar" Type="Int32" />
           <Property Name="STSNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Car" Relationship="Self.FK_STS_Car" FromRole="STS" ToRole="Car" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_STS_Client" FromRole="STS" ToRole="Client" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -508,10 +489,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Car_brand">
-          <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="brand">
+            <Principal Role="Brand">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Car">
@@ -520,10 +501,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Model_brand">
-          <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
           <End Role="Model" Type="Self.Model" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="brand">
+            <Principal Role="Brand">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Model">
@@ -567,26 +548,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Car_Model">
-          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
-          <End Role="Car" Type="Self.Car" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Car">
-              <PropertyRef Name="idModel" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_contract_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
-          <End Role="contract" Type="Self.contract" Multiplicity="*" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Car">
               <PropertyRef Name="idCar" />
             </Principal>
-            <Dependent Role="contract">
+            <Dependent Role="Contract">
               <PropertyRef Name="idCar" />
             </Dependent>
           </ReferentialConstraint>
@@ -603,6 +572,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Client_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="idRole" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Law_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Law" Type="Self.Law" Multiplicity="*" />
@@ -615,31 +596,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_STS_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
-          <End Role="STS" Type="Self.STS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="idClient" />
-            </Principal>
-            <Dependent Role="STS">
-              <PropertyRef Name="idClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="CTPBDEntities8" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CTPBDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accident" EntityType="Self.Accident" />
           <EntitySet Name="Admin" EntityType="Self.Admin" />
-          <EntitySet Name="brand" EntityType="Self.brand" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
           <EntitySet Name="Calculations" EntityType="Self.Calculations" />
           <EntitySet Name="Car" EntityType="Self.Car" />
           <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="contract" EntityType="Self.contract" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" />
           <EntitySet Name="DateIs" EntityType="Self.DateIs" />
           <EntitySet Name="Experience" EntityType="Self.Experience" />
           <EntitySet Name="Law" EntityType="Self.Law" />
           <EntitySet Name="Model" EntityType="Self.Model" />
-          <EntitySet Name="Price" EntityType="Self.Price" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="STS" EntityType="Self.STS" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_Calculations_Accident" Association="Self.FK_Calculations_Accident">
@@ -647,11 +616,11 @@
             <End Role="Calculations" EntitySet="Calculations" />
           </AssociationSet>
           <AssociationSet Name="FK_Car_brand" Association="Self.FK_Car_brand">
-            <End Role="brand" EntitySet="brand" />
+            <End Role="Brand" EntitySet="Brand" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
           <AssociationSet Name="FK_Model_brand" Association="Self.FK_Model_brand">
-            <End Role="brand" EntitySet="brand" />
+            <End Role="Brand" EntitySet="Brand" />
             <End Role="Model" EntitySet="Model" />
           </AssociationSet>
           <AssociationSet Name="FK_Calculations_DateIs" Association="Self.FK_Calculations_DateIs">
@@ -666,25 +635,21 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
-          <AssociationSet Name="FK_Car_Model" Association="Self.FK_Car_Model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="Car" EntitySet="Car" />
-          </AssociationSet>
           <AssociationSet Name="FK_contract_Car" Association="Self.FK_contract_Car">
             <End Role="Car" EntitySet="Car" />
-            <End Role="contract" EntitySet="contract" />
+            <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
           <AssociationSet Name="FK_STS_Car" Association="Self.FK_STS_Car">
             <End Role="Car" EntitySet="Car" />
             <End Role="STS" EntitySet="STS" />
           </AssociationSet>
+          <AssociationSet Name="FK_Client_Role" Association="Self.FK_Client_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
           <AssociationSet Name="FK_Law_Client" Association="Self.FK_Law_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Law" EntitySet="Law" />
-          </AssociationSet>
-          <AssociationSet Name="FK_STS_Client" Association="Self.FK_STS_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="STS" EntitySet="STS" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -692,7 +657,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities8">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CTPBDModelContainer" CdmEntityContainer="CTPBDEntities">
           <EntitySetMapping Name="Accident">
             <EntityTypeMapping TypeName="CTPBDModel.Accident">
               <MappingFragment StoreEntitySet="Accident">
@@ -712,9 +677,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="brand">
-            <EntityTypeMapping TypeName="CTPBDModel.brand">
-              <MappingFragment StoreEntitySet="brand">
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="CTPBDModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
@@ -756,12 +721,13 @@
                 <ScalarProperty Name="Passport" ColumnName="Passport" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="contract">
-            <EntityTypeMapping TypeName="CTPBDModel.contract">
-              <MappingFragment StoreEntitySet="contract">
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="CTPBDModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
                 <ScalarProperty Name="idContract" ColumnName="idContract" />
                 <ScalarProperty Name="idCar" ColumnName="idCar" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
@@ -791,7 +757,6 @@
           <EntitySetMapping Name="Law">
             <EntityTypeMapping TypeName="CTPBDModel.Law">
               <MappingFragment StoreEntitySet="Law">
-                <ScalarProperty Name="images" ColumnName="images" />
                 <ScalarProperty Name="idLaw" ColumnName="idLaw" />
                 <ScalarProperty Name="idClient" ColumnName="idClient" />
                 <ScalarProperty Name="DateIssue" ColumnName="DateIssue" />
@@ -801,6 +766,7 @@
                 <ScalarProperty Name="TPAuthority" ColumnName="TPAuthority" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="images" ColumnName="images" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -813,12 +779,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Price">
-            <EntityTypeMapping TypeName="CTPBDModel.Price">
-              <MappingFragment StoreEntitySet="Price">
-                <ScalarProperty Name="id" ColumnName="id" />
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="CTPBDModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Price1" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -826,7 +791,6 @@
             <EntityTypeMapping TypeName="CTPBDModel.STS">
               <MappingFragment StoreEntitySet="STS">
                 <ScalarProperty Name="idSTS" ColumnName="idSTS" />
-                <ScalarProperty Name="idClient" ColumnName="idClient" />
                 <ScalarProperty Name="idCar" ColumnName="idCar" />
                 <ScalarProperty Name="STSNumber" ColumnName="STSNumber" />
               </MappingFragment>

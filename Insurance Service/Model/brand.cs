@@ -12,10 +12,10 @@ namespace Insurance_Service.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class brand
+    public partial class Brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public brand()
+        public Brand()
         {
             this.Car = new HashSet<Car>();
             this.Model = new HashSet<Model>();

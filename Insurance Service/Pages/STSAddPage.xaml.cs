@@ -51,13 +51,13 @@ namespace Insurance_Service.Pages
                 var car = CBCar.SelectedItem as Model.Car;
                 var client = CBClient.SelectedItem as Model.Client;
                
-                Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text || s.idClient == client.idClient);
+                Model.STS sts = BD_Connection.bd.STS.FirstOrDefault(s => s.STSNumber == TBNumber.Text);
                 if (sts == null)
                 {
                     Model.STS stsCreate = new Model.STS()
                     {
                         idCar = car.idCar,
-                        idClient = client.idClient,
+                       // idClient = client.idClient,
                         STSNumber = TBNumber.Text
                     };
                     BD_Connection.bd.STS.Add(stsCreate);

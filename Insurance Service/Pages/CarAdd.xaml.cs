@@ -22,12 +22,12 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class CarAdd : Page
     {
-        Model.CTPBDEntities8 bd = new CTPBDEntities8();
+        Model.CTPBDEntities bd = new CTPBDEntities();
         public CarAdd()
         {
             InitializeComponent();
             CBClient.ItemsSource = BD_Connection.bd.Client.ToList();
-            CBrand.ItemsSource = BD_Connection.bd.brand.ToList();
+            CBrand.ItemsSource = BD_Connection.bd.Brand.ToList();
             TBColor.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
            
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
@@ -49,7 +49,7 @@ namespace Insurance_Service.Pages
                 else
                 {
                     var client = CBClient.SelectedItem as Client;
-                    var brand = CBrand.SelectedItem as brand;
+                    var brand = CBrand.SelectedItem as Brand;
                     var model = CBCar.SelectedItem as Model.Model;
                     Model.Car car = BD_Connection.bd.Car.FirstOrDefault(c => c.VIN == TBVin.Text || c.StateNumber == TBNumber.Text);
                     if (car == null)
@@ -97,7 +97,7 @@ namespace Insurance_Service.Pages
 
         private void CBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var brand = CBrand.SelectedItem as Model.brand;
+            var brand = CBrand.SelectedItem as Model.Brand;
             if (brand != null)
             {
                 CBCar.ItemsSource = BD_Connection.bd.Model.Where(x => x.idBrands == brand.id).ToList();

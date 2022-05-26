@@ -26,13 +26,13 @@ namespace Insurance_Service.Pages
         public ContractShowPage()
         {
             InitializeComponent();
-            contractList.ItemsSource = BD_Connection.bd.contract.ToList();
-            countContract.Text = $"{BD_Connection.bd.contract.Count().ToString()} contracts";
+            contractList.ItemsSource = BD_Connection.bd.Contract.ToList();
+            countContract.Text = $"{BD_Connection.bd.Contract.Count().ToString()} contracts";
         }
         public void Refresh()
         {
             contractList.ItemsSource = null;
-            contractList.ItemsSource = BD_Connection.bd.contract.ToList();
+            contractList.ItemsSource = BD_Connection.bd.Contract.ToList();
             TBLogin.Text = null;
             TBName.Text = null;
             TBNumber.Text = null;
@@ -52,13 +52,13 @@ namespace Insurance_Service.Pages
         {
             try
             {
-                var selected = contractList.SelectedItem as Model.contract;
+                var selected = contractList.SelectedItem as Model.Contract;
                 TBLogin.Text = selected.Car.Client.Login;
                 TBName.Text = selected.Car.Client.Name;
                 TBNumber.Text = selected.Car.Client.Number;
 
                 TBStateNumber.Text = selected.Car.StateNumber;
-                TBModel.Text = selected.Car.Model.Name;
+                //TBModel.Text = selected.Car.Model.Name;
                 TBVIN.Text = selected.Car.VIN;
 
                 TBPrice.Text = selected.Price.ToString();
@@ -74,7 +74,7 @@ namespace Insurance_Service.Pages
             Refresh();
             try
             {
-                contractList.ItemsSource = BD_Connection.bd.contract.ToList().Where(c => c.Car.Client.Login == TBLogins.Text || c.Car.StateNumber == TBLogins.Text || c.Car.brand.name == TBLogins.Text);
+                contractList.ItemsSource = BD_Connection.bd.Contract.ToList().Where(c => c.Car.Client.Login == TBLogins.Text || c.Car.StateNumber == TBLogins.Text || c.Car.Brand.name == TBLogins.Text);
                 if (TBLogins.Text == "")
                 {
                     Refresh();

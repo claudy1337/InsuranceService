@@ -8,6 +8,6 @@ namespace Insurance_Service.CurrentData
 {
     public class BD_Connection
     {
-        public static Model.CTPBDEntities8 bd = new Model.CTPBDEntities8();
+        public static Model.CTPBDEntities bd = new Model.CTPBDEntities();
     }
 }

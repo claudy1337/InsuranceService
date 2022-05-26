@@ -4,32 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d0aa70885691451b9d55850ca8e8e041" Name="Diagram1">
-        <EntityTypeShape EntityType="CTPBDModel.Accident" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Admin" Width="1.5" PointX="9.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.brand" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Calculations" Width="1.5" PointX="10" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Car" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Client" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.contract" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.DateIs" Width="1.5" PointX="7.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Experience" Width="1.5" PointX="7.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Law" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Model" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.Price" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.STS" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CTPBDModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="8.125" IsExpanded="true" />
+      <Diagram DiagramId="09dee07a3779436abf41fcd5f25fdba1" Name="Diagram1">
+        <EntityTypeShape EntityType="CTPBDModel.Accident" Width="1.5" PointX="7.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Admin" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Brand" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Calculations" Width="1.5" PointX="10" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Car" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Client" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Contract" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.DateIs" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Experience" Width="1.5" PointX="7.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Law" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Model" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.Role" Width="1.5" PointX="1.5" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.STS" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTPBDModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
         <AssociationConnector Association="CTPBDModel.FK_Calculations_Accident" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Car_brand" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Model_brand" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Calculations_DateIs" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Calculations_Experience" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Car_Client1" ManuallyRouted="false" />
-        <AssociationConnector Association="CTPBDModel.FK_Car_Model" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_contract_Car" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_STS_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="CTPBDModel.FK_Client_Role" ManuallyRouted="false" />
         <AssociationConnector Association="CTPBDModel.FK_Law_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="CTPBDModel.FK_STS_Client" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

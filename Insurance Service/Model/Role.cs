@@ -12,10 +12,18 @@ namespace Insurance_Service.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Price
+    public partial class Role
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Role()
+        {
+            this.Client = new HashSet<Client>();
+        }
+    
+        public int idRole { get; set; }
         public string Type { get; set; }
-        public Nullable<decimal> Price1 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Client { get; set; }
     }
 }

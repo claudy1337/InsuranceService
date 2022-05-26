@@ -19,7 +19,6 @@ namespace Insurance_Service.Model
         {
             this.Car = new HashSet<Car>();
             this.Law = new HashSet<Law>();
-            this.STS = new HashSet<STS>();
         }
     
         public int idClient { get; set; }
@@ -32,12 +31,12 @@ namespace Insurance_Service.Model
         public string Passport { get; set; }
         public string Password { get; set; }
         public string Login { get; set; }
+        public int idRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Car { get; set; }
+        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Law> Law { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STS> STS { get; set; }
     }
 }

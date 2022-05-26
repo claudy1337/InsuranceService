@@ -41,7 +41,7 @@ namespace Insurance_Service.Pages
         public Calculator()
         {
             InitializeComponent();
-            CBrand.ItemsSource = BD_Connection.bd.brand.ToList();
+            CBrand.ItemsSource = BD_Connection.bd.Brand.ToList();
             CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();
             TBVin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBExperience.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
@@ -50,7 +50,7 @@ namespace Insurance_Service.Pages
 
         private void CBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var brand = CBrand.SelectedItem as Model.brand;
+            var brand = CBrand.SelectedItem as Model.Brand;
             if (brand != null)
             {
                 CBCar.ItemsSource = BD_Connection.bd.Model.Where(x => x.idBrands == brand.id).ToList();
@@ -71,7 +71,7 @@ namespace Insurance_Service.Pages
             int procent = Assets.Assets.procent;
             int price = Assets.Assets.Price;
 
-            var brand = CBrand.SelectedItem as Model.brand;
+            var brand = CBrand.SelectedItem as Model.Brand;
             var model = CBCar.SelectedItem as Model.Model;
             var accident = CBAccident.SelectedItem as Model.Accident;
 
