@@ -60,8 +60,7 @@ namespace Insurance_Service.Pages
                             idBrand = brand.id,
                             VIN = TBVin.Text,
                             IdClient = client.idClient,
-                            Color = TBColor.Text,
-                            idModel = model.id
+                            Color = TBColor.Text
 
                         };
                         bd.Car.Add(carCreate);

@@ -21,14 +21,34 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ClientShowPage : Page
     {
+        public static Users CurrentUser;
         public ClientShowPage(Users users)
         {
+            CurrentUser = users;
             InitializeComponent();
             if (CBclear.IsChecked == true)
             {
                TBSearch.Text = null;
             }
-            returnConnect(); 
+            if (CurrentUser.Usrerole == 1)
+            {
+                TBSearch.Visibility = Visibility.Hidden;
+                BSearchUser.Visibility = Visibility.Hidden;
+                CBclear.Visibility = Visibility.Hidden;
+                ltv.Visibility = Visibility.Hidden;
+                BEdit.Visibility = Visibility.Hidden;
+                TBNameSplit.Text = CurrentUser.Name;
+                TBCity.Text = CurrentUser.City;
+                TBLogin.Text = CurrentUser.Login;
+                TBNumber.Text = CurrentUser.Number;
+                TBBirthDay.Text = CurrentUser.BirthDay;
+                TBPasport.Text = CurrentUser.Passport;
+            }
+            else
+            {
+                returnConnect();
+            }
+            
             TBPasport.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBCity.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));

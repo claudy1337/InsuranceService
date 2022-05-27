@@ -126,7 +126,7 @@ namespace Insurance_Service.Pages
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new ChoosingActionPage());
+           // NavigationService.Navigate(new ChoosingActionPage());
         }
 
         private void clientVerificated_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

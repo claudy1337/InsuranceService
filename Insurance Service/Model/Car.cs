@@ -27,7 +27,6 @@ namespace Insurance_Service.Model
         public string VIN { get; set; }
         public Nullable<int> IdClient { get; set; }
         public string Color { get; set; }
-        public Nullable<int> idModel { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Client Client { get; set; }

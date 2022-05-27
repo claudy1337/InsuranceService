@@ -23,8 +23,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Binding="{Binding idCar}"/>
                 <DataGridTextColumn Header="State Number" Binding="{Binding StateNumber}"/>
-                <DataGridTextColumn Header="Brand" Binding="{Binding brand.name}"/>
-                <DataGridTextColumn Header="Model" Binding="{Binding Model.Name}"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand.name}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Brand.Model.Name}"/>
                 <DataGridTextColumn Header="VIN" Binding="{Binding VIN}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Client.Name}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Client.LastName}"/>

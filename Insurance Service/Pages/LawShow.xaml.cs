@@ -23,11 +23,21 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class LawShow : Page
     {
+        public static Users currentUsers;
         public LawShow(Users users)
         {
             InitializeComponent();
-            countLaw.Text = $"{BD_Connection.bd.Law.Count().ToString()} law";
-            lst.ItemsSource = BD_Connection.bd.Law.ToList();
+            currentUsers = users;
+            if (CurrentUser.Usrerole == 1)
+            {
+                EDIT.Visibility = Visibility.Hidden;
+                lst.ItemsSource = BD_Connection.bd.Law.Where(c=>c.idClient == CurrentUser.Id).ToList();
+            }
+            else
+            {
+                countLaw.Text = $"{BD_Connection.bd.Law.Count().ToString()} law";
+                lst.ItemsSource = BD_Connection.bd.Law.ToList();
+            }
             TBIdClient.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBNumber.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBTPAuthority.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
@@ -57,15 +67,7 @@ namespace Insurance_Service.Pages
             DateEnd.Text = selected.DateEnd.ToString();
             TBTPAuthority.Text = selected.TPAuthority;
             TBSignature.Text = selected.Region;
-            if (selected.image == "")
-            {
-                usrImage.Source = null;
-                
-            }
-            else if (selected.image != null)
-            {
-              //  usrImage.Source = new BitmapImage(new Uri(selected.images, UriKind.RelativeOrAbsolute));
-            }
+            
         }
     }
 }

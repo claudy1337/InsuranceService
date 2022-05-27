@@ -22,11 +22,13 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ChoosingActionPage : Page
     {
-        public static Users users; 
-        Assets.Assets assets;
-        public ChoosingActionPage()
+        public static Users currentUsers;
+       
+        public ChoosingActionPage(Users users)
         {
             InitializeComponent();
+            currentUsers = users;
+            usrName.Text = currentUsers.Name;
             if (CurrentUser.Usrerole == 1)
             {
                 clietAdd.Visibility = Visibility.Hidden;
@@ -52,7 +54,7 @@ namespace Insurance_Service.Pages
 
         private void clientShow_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ClientShowPage(users));
+            NavigationService.Navigate(new ClientShowPage(currentUsers));
         }
 
         private void carAdd_Click(object sender, RoutedEventArgs e)
@@ -62,7 +64,7 @@ namespace Insurance_Service.Pages
 
         private void carShow_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CarShow(users));
+            NavigationService.Navigate(new CarShow(currentUsers));
         }
 
         private void LawAdd_Click(object sender, RoutedEventArgs e)
@@ -72,7 +74,7 @@ namespace Insurance_Service.Pages
 
         private void LawShow_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new LawShow(users));
+            NavigationService.Navigate(new LawShow(currentUsers));
         }
 
         private void STSAdd_Click(object sender, RoutedEventArgs e)
@@ -82,17 +84,17 @@ namespace Insurance_Service.Pages
 
         private void STSShow_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new STSShowPage(users));
+            NavigationService.Navigate(new STSShowPage(currentUsers));
         }
 
         private void ContractShow_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ContractShowPage(users));
+            NavigationService.Navigate(new ContractShowPage(currentUsers));
         }
 
         private void Calculator_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Calculator(users));
+            NavigationService.Navigate(new Calculator(currentUsers));
         }
 
         private void Bexit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CTPBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CTPBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accident">
           <Key>
             <PropertyRef Name="id" />
@@ -48,7 +48,6 @@
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
           <Property Name="IdClient" Type="int" />
           <Property Name="Color" Type="nvarchar" MaxLength="50" />
-          <Property Name="idModel" Type="int" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -104,7 +103,6 @@
           <Property Name="Region" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TPAuthority" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="image" Type="nvarchar" MaxLength="50" />
           <Property Name="images" Type="image" />
         </EntityType>
         <EntityType Name="Model">
@@ -316,8 +314,7 @@
             <End Role="STS" EntitySet="STS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CTPBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -370,7 +367,6 @@
           <Property Name="VIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdClient" Type="Int32" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="idModel" Type="Int32" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Car_brand" FromRole="Car" ToRole="Brand" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Car_Client1" FromRole="Car" ToRole="Client" />
           <NavigationProperty Name="Contract" Relationship="Self.FK_contract_Car" FromRole="Car" ToRole="Contract" />
@@ -436,7 +432,6 @@
           <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TPAuthority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="images" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Law_Client" FromRole="Law" ToRole="Client" />
         </EntityType>
@@ -704,7 +699,6 @@
                 <ScalarProperty Name="VIN" ColumnName="VIN" />
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="idModel" ColumnName="idModel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -765,7 +759,6 @@
                 <ScalarProperty Name="Region" ColumnName="Region" />
                 <ScalarProperty Name="TPAuthority" ColumnName="TPAuthority" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="images" ColumnName="images" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -122,15 +122,15 @@ namespace Insurance_Service.Pages
                 var accident = CBAccident.SelectedItem as Model.Accident;
                 var cars = CBCar.SelectedItem as Model.Car;
                 var experience = Convert.ToInt32(TBExperience.Text);
-                if (cars.idModel > 2 && cars.idModel < 10)
+                if (cars.idBrand > 2 && cars.idBrand < 10)
                 {
                     Assets.Assets.valuePrice += 500;
                 }
-                else if (cars.idModel > 10 && cars.idModel < 25)
+                else if (cars.idBrand > 10 && cars.idBrand < 25)
                 {
                     Assets.Assets.valuePrice += 500;
                 }
-                else if (cars.idModel > 25 && cars.idModel < 100)
+                else if (cars.idBrand > 25 && cars.idBrand < 100)
                 {
                     Assets.Assets.valuePrice += 1000;
                 }

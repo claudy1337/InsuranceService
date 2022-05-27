@@ -41,23 +41,32 @@ namespace Insurance_Service.Pages
                     if (clientData.idRole == 1 && clientData != null)
                     {
                         CurrentUser.Usrerole = clientData.idRole;
-                        Users users = new Users(clientData.idClient, clientData.Name, clientData.LastName, clientData.Number, clientData.idRole);
+                        Users users = new Users(clientData.idClient, clientData.Name, 
+                            clientData.LastName, clientData.FullName, clientData.BirthDay, 
+                            clientData.Number, clientData.City, clientData.Passport, 
+                            clientData.Password, clientData.Login, clientData.idRole);
                         MessageBox.Show("welcome user: " + clientData.Name);
-                        NavigationService.Navigate(new ChoosingActionPage());
+                        NavigationService.Navigate(new ChoosingActionPage(users));
                     }
                     else if (clientData.idRole == 2 && clientData != null)
                     {
                         CurrentUser.Usrerole = clientData.idRole;
-                        Users users = new Users(clientData.idClient, clientData.Name, clientData.LastName, clientData.Number, clientData.idRole);
+                        Users users = new Users(clientData.idClient, clientData.Name,
+                            clientData.LastName, clientData.FullName, clientData.BirthDay,
+                            clientData.Number, clientData.City, clientData.Passport,
+                            clientData.Password, clientData.Login, clientData.idRole);
                         MessageBox.Show("welcome admin: " + clientData.Name);
-                        NavigationService.Navigate(new ChoosingActionPage());
+                        NavigationService.Navigate(new ChoosingActionPage(users));
                     }
                     else if (clientData.idRole == 3 && clientData != null)
                     {
                         MessageBox.Show("welcome consultant :" + clientData.Name);
-                        Users users = new Users(clientData.idClient, clientData.Name, clientData.LastName, clientData.Number, clientData.idRole);
+                        Users users = new Users(clientData.idClient, clientData.Name,
+                            clientData.LastName, clientData.FullName, clientData.BirthDay,
+                            clientData.Number, clientData.City, clientData.Passport,
+                            clientData.Password, clientData.Login, clientData.idRole);
                         CurrentUser.Usrerole = clientData.idRole;
-                        NavigationService.Navigate(new ChoosingActionPage());
+                        NavigationService.Navigate(new ChoosingActionPage(users));
 
                     }
                     else if (clientData == null || clientData.idRole == null)

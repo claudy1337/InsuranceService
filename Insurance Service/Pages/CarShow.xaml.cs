@@ -23,10 +23,25 @@ namespace Insurance_Service.Pages
     public partial class CarShow : Page
     {
         Model.CTPBDEntities BD = new CTPBDEntities();
+        public static Users currentUser;
         public CarShow(Users users)
         {
+            
             InitializeComponent();
-            Refresh();
+            currentUser = users;
+            if (CurrentUser.Usrerole == 1 )
+            {
+                TBSearch.Visibility = Visibility.Hidden;
+                TBSearch.Visibility = Visibility.Hidden;
+                Bdelete.Visibility = Visibility.Hidden;
+                Search.Visibility = Visibility.Hidden;
+                DGCar.ItemsSource = BD_Connection.bd.Car.Where(c=>c.Client.idClient == CurrentUser.Id).ToList();
+            }
+            else
+            {
+                Refresh();
+            }
+           
         }
 
         private void BBack_Click(object sender, RoutedEventArgs e)
