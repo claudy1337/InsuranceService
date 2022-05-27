@@ -35,7 +35,7 @@ namespace Insurance_Service.Pages
                 TBSearch.Visibility = Visibility.Hidden;
                 Bdelete.Visibility = Visibility.Hidden;
                 Search.Visibility = Visibility.Hidden;
-                DGCar.ItemsSource = BD_Connection.bd.Car.Where(c=>c.Client.idClient == CurrentUser.Id).ToList();
+                DGCar.ItemsSource = BD_Connection.bd.Car.Where(c=>c.Client.idClient == users.Id).ToList();
             }
             else
             {

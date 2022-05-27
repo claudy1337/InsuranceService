@@ -38,14 +38,20 @@ namespace Insurance_Service.Pages
     public partial class Calculator : Page
     {
         Assets.Assets assets;
+        public static Users currentUser;
         public Calculator(Users users)
         {
             InitializeComponent();
+            currentUser = users;
             CBrand.ItemsSource = BD_Connection.bd.Brand.ToList();
             CBAccident.ItemsSource = BD_Connection.bd.Accident.ToList();
             TBVin.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBExperience.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
             TBYear.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteCommand));
+            if (users.Usrerole == 1)
+            {
+                createContract.Visibility = Visibility.Hidden;
+            }
         }
 
         private void CBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -23,11 +23,24 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ContractShowPage : Page
     {
+        public static Users currentUser;
         public ContractShowPage(Users users)
         {
             InitializeComponent();
-            contractList.ItemsSource = BD_Connection.bd.Contract.ToList();
-            countContract.Text = $"{BD_Connection.bd.Contract.Count().ToString()} contracts";
+            currentUser = users;
+            if (CurrentUser.Usrerole == 1)
+            {
+                auth.Visibility = Visibility.Hidden;
+                TBLogins.Visibility = Visibility.Hidden;
+                autsh.Visibility = Visibility.Hidden;
+                contractList.ItemsSource = BD_Connection.bd.Contract.Where(c=>c.Car.IdClient == users.Id).ToList();
+            }
+            else
+            {
+                contractList.ItemsSource = BD_Connection.bd.Contract.ToList();
+                countContract.Text = $"{BD_Connection.bd.Contract.Count().ToString()} contracts";
+            }
+            
         }
         public void Refresh()
         {

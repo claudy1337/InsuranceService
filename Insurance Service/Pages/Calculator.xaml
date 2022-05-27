@@ -111,7 +111,7 @@
                             <TextBlock x:Name="price" HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Ubuntu" FontSize="24"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Back" Margin="20,15,0,0" FontFamily="Ubuntu" FontSize="24" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
-                                <TextBlock Text="Create" VerticalAlignment="Center" Margin="220,15,0,0" FontFamily="Ubuntu" FontSize="24" HorizontalAlignment="Right" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
+                                <TextBlock Text="Create" x:Name="createContract" VerticalAlignment="Center" Margin="220,15,0,0" FontFamily="Ubuntu" FontSize="24" HorizontalAlignment="Right" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"/>
                             </StackPanel>
                          
                         </StackPanel>

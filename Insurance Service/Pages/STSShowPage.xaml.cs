@@ -22,10 +22,22 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class STSShowPage : Page
     {
+        public static Users currentUser;
         public STSShowPage(Users users)
         {
+            currentUser = users;
             InitializeComponent();
-            Refresh();
+            if (CurrentUser.Id == 1)
+            {
+                Search.Visibility = Visibility.Hidden;
+                TBSearch.Visibility = Visibility.Hidden;
+                DGSsts.ItemsSource = BD_Connection.bd.STS.Where(c=>c.Car.Client.idClient == users.Id).ToList();
+            }
+            else
+            {
+                Refresh();
+            }
+           
         }
 
         private void BBack_Click(object sender, RoutedEventArgs e)
