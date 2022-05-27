@@ -38,7 +38,7 @@ namespace Insurance_Service.Pages
     public partial class Calculator : Page
     {
         Assets.Assets assets;
-        public Calculator()
+        public Calculator(Users users)
         {
             InitializeComponent();
             CBrand.ItemsSource = BD_Connection.bd.Brand.ToList();

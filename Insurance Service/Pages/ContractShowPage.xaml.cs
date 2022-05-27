@@ -23,7 +23,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ContractShowPage : Page
     {
-        public ContractShowPage()
+        public ContractShowPage(Users users)
         {
             InitializeComponent();
             contractList.ItemsSource = BD_Connection.bd.Contract.ToList();

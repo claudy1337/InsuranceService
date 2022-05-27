@@ -22,7 +22,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class STSShowPage : Page
     {
-        public STSShowPage()
+        public STSShowPage(Users users)
         {
             InitializeComponent();
             Refresh();

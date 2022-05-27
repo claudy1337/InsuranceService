@@ -23,7 +23,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class LawShow : Page
     {
-        public LawShow()
+        public LawShow(Users users)
         {
             InitializeComponent();
             countLaw.Text = $"{BD_Connection.bd.Law.Count().ToString()} law";

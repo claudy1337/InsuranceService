@@ -8,6 +8,7 @@ namespace Insurance_Service.CurrentData
 {
     public static class CurrentUser
     {
+       
         public static int Id { get; set; }
         public static string Name { get; set; }
         public static string LastName { get; set; }
@@ -16,6 +17,7 @@ namespace Insurance_Service.CurrentData
         public  static string Number { get; set; }
         public static string City { get; set; }
         public static string Passport { get; set; }
+        public static int Usrerole { get; set; }
 
     }
 }

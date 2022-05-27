@@ -21,7 +21,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class ClientShowPage : Page
     {
-        public ClientShowPage()
+        public ClientShowPage(Users users)
         {
             InitializeComponent();
             if (CBclear.IsChecked == true)

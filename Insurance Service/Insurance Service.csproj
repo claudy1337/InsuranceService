@@ -120,6 +120,7 @@
     </ApplicationDefinition>
     <Compile Include="Assets\Assets.cs" />
     <Compile Include="CurrentData\CurrentUser.cs" />
+    <Compile Include="CurrentData\Users.cs" />
     <Compile Include="Model\Accident.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

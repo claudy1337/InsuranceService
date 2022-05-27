@@ -23,6 +23,7 @@ namespace Insurance_Service.Pages
     /// </summary>
     public partial class Auth : Page
     {
+        public static Users user;
         public Auth()
         {
             InitializeComponent();
@@ -32,23 +33,49 @@ namespace Insurance_Service.Pages
         private void auth_Click(object sender, RoutedEventArgs e)
         {
             Role role = BD_Connection.bd.Role.FirstOrDefault();
-            Model.Client clientData = BD_Connection.bd.Client.FirstOrDefault(c=> c.Login == TBLogin.Text && c.Password == TBPassword.Text);
-            if (clientData.idRole == 1)
+            Model.Client clientData = BD_Connection.bd.Client.FirstOrDefault(c => c.Login == TBLogin.Text && c.Password == TBPassword.Text);
+            if (clientData != null)
             {
-                
-                MessageBox.Show("welcome user: " + clientData.Name);
-            }
-            else if(clientData.idRole == 2)
-            {
-                NavigationService.Navigate(new ChoosingActionPage());
-                MessageBox.Show("welcome admin: " + clientData.Name);
-            }
-            else if (true)
-            {
-                MessageBox.Show("welcome prodavech: " + clientData.Name);
+                try
+                {
+                    if (clientData.idRole == 1 && clientData != null)
+                    {
+                        CurrentUser.Usrerole = clientData.idRole;
+                        Users users = new Users(clientData.idClient, clientData.Name, clientData.LastName, clientData.Number, clientData.idRole);
+                        MessageBox.Show("welcome user: " + clientData.Name);
+                        NavigationService.Navigate(new ChoosingActionPage());
+                    }
+                    else if (clientData.idRole == 2 && clientData != null)
+                    {
+                        CurrentUser.Usrerole = clientData.idRole;
+                        Users users = new Users(clientData.idClient, clientData.Name, clientData.LastName, clientData.Number, clientData.idRole);
+                        MessageBox.Show("welcome admin: " + clientData.Name);
+                        NavigationService.Navigate(new ChoosingActionPage());
+                    }
+                    else if (clientData.idRole == 3 && clientData != null)
+                    {
+                        MessageBox.Show("welcome consultant :" + clientData.Name);
+                        Users users = new Users(clientData.idClient, clientData.Name, clientData.LastName, clientData.Number, clientData.idRole);
+                        CurrentUser.Usrerole = clientData.idRole;
+                        NavigationService.Navigate(new ChoosingActionPage());
+
+                    }
+                    else if (clientData == null || clientData.idRole == null)
+                    {
+                        MessageBox.Show("error");
+                    }
+                }
+                catch (System.NullReferenceException ex)
+                {
+                    MessageBox.Show("incorrect");
+                }
             }
             else
-                MessageBox.Show("error");
+            {
+                MessageBox.Show("incorrect");
+            }
+            
+               
         }
         public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
         {

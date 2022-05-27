@@ -23,7 +23,7 @@ namespace Insurance_Service.Pages
     public partial class CarShow : Page
     {
         Model.CTPBDEntities BD = new CTPBDEntities();
-        public CarShow()
+        public CarShow(Users users)
         {
             InitializeComponent();
             Refresh();
