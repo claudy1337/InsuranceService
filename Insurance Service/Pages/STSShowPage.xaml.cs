@@ -27,11 +27,11 @@ namespace Insurance_Service.Pages
         {
             currentUser = users;
             InitializeComponent();
-            if (CurrentUser.Id == 1)
+            if (users.Usrerole == 1)
             {
                 Search.Visibility = Visibility.Hidden;
                 TBSearch.Visibility = Visibility.Hidden;
-                DGSsts.ItemsSource = BD_Connection.bd.STS.Where(c=>c.Car.Client.idClient == users.Id).ToList();
+                DGSsts.ItemsSource = BD_Connection.bd.STS.Where(c => c.Car.Client.idClient == currentUser.Id).ToList();
             }
             else
             {

@@ -31,7 +31,7 @@ namespace Insurance_Service.Pages
             if (CurrentUser.Usrerole == 1)
             {
                 EDIT.Visibility = Visibility.Hidden;
-                lst.ItemsSource = BD_Connection.bd.Law.Where(c=>c.idClient == users.Id).ToList();
+                lst.ItemsSource = BD_Connection.bd.Law.Where(c => c.Client.idClient == users.Id).ToList();
             }
             else
             {
