@@ -46,8 +46,7 @@ namespace Insurance_Service.Pages
         {
             try
             {
-                byte[] array = Encoding.ASCII.GetBytes(photo);
-                if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text) && array == null)
+                if (string.IsNullOrEmpty(TBNumber.Text) && string.IsNullOrEmpty(TBSignature.Text) && string.IsNullOrEmpty(TBTPAuthority.Text) && string.IsNullOrEmpty(DateIssue.Text))
                 {
                     MessageBox.Show("incorrect");
                     return;
@@ -66,8 +65,7 @@ namespace Insurance_Service.Pages
                             Number = TBNumber.Text,
                             Region = TBSignature.Text,
                             Category = "B,M",
-                            TPAuthority = TBTPAuthority.Text,
-                            images = array
+                            TPAuthority = TBTPAuthority.Text
 
                         };
                         BD_Connection.bd.Law.Add(lawCreate);
@@ -89,7 +87,6 @@ namespace Insurance_Service.Pages
         }
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //NavigationService.Navigate(new ClientAddPage());
             TBTPAuthority.Text = DateIssue + "00.00.0002";
         }
         public void Refresh()
@@ -121,16 +118,17 @@ namespace Insurance_Service.Pages
                 e.Handled = true;
             }
         }
-
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-            if (op.ShowDialog() == true)
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FilterIndex = 1;
+            if (ofd.ShowDialog() == true)
             {
-                usrImage.Source = new BitmapImage(new Uri(op.FileName));
-                photo = op.FileName;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(ofd.FileName);
+                bitmapImage.EndInit();
+                usrImage.Source = bitmapImage;
             }
         }
     }

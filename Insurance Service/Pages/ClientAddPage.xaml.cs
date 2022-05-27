@@ -63,7 +63,8 @@ namespace Insurance_Service.Pages
                                 Password = TBPassword.Text,
                                 BirthDay = BithDay.Text,
                                 Passport = TBPassport.Text,
-                                City = TBCity.Text
+                                City = TBCity.Text,
+                                idRole = 1
                             };
                             BD_Connection.bd.Client.Add(client);
                             BD_Connection.bd.SaveChanges();
@@ -126,7 +127,7 @@ namespace Insurance_Service.Pages
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-           // NavigationService.Navigate(new ChoosingActionPage());
+            NavigationService.GoBack();
         }
 
         private void clientVerificated_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -134,5 +135,9 @@ namespace Insurance_Service.Pages
             Verificated();
         }
 
+        private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
